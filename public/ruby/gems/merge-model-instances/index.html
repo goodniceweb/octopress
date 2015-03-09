@@ -1,0 +1,247 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Merge Model Instances - GoodNiceWeb</title>
+  <meta name="author" content="Alexey Cherkashin">
+
+  
+  <meta name="description" content="Sometimes we can understand that our model field required validation too late. Better late than nerer: you add validation to model and get better new &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://goodniceweb.com/ruby/gems/merge-model-instances">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="GoodNiceWeb" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="//fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="//fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">GoodNiceWeb</a></h1>
+  
+    <h2>Let&#8217;s make web better together!</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="https://www.google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:goodniceweb.com" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">Merge Model Instances</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2015-03-07T22:18:42+02:00'><span class='date'><span class='date-month'>Mar</span> <span class='date-day'>7</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>10:18 pm</span></time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>Sometimes we can understand that our model field required validation too late. Better late than nerer: you add validation to model and get better new records. But what we can do with old invalid data?</p>
+
+<p>Just merge it!</p>
+
+<p>Yes, I know: sometimes it can be impossible. For sensitive, personal data maybe. But sometimes it can give very good results.</p>
+
+<p>In one of my projects was need to merge customers records. There some tools for ActiveRecord:</p>
+
+<!--more-->
+
+
+<ol>
+<li><a href="https://github.com/collectiveidea/merger">https://github.com/collectiveidea/merger</a></li>
+<li><a href="https://github.com/grosser/ar_merge">https://github.com/grosser/ar_merge</a></li>
+</ol>
+
+
+<p>First - older solution, add <code>merge!</code> method to your model instance. Unmaintainable anymore.
+Second - newer solution(looks like it work with rails 4).
+All above gems provide nice features:
+- different built-in protections
+- removes merged records
+- merge associations as well</p>
+
+<p>Sounds great, but not for MongoId. For MongoId I found only <code>merge-mongoid</code>:
+<a href="https://github.com/fallanic/merge-mongoid">https://github.com/fallanic/merge-mongoid</a></p>
+
+<p>It contains almost all required things, only associations was not merged.</p>
+
+<p>For me it was important so I forked this gem and add missing feature. I also rewrite all tests, because looks like previous maintainer is not Ruby developer =)
+So, for now you will find new versions here: <a href="https://github.com/goodniceweb/merge-mongoid">https://github.com/goodniceweb/merge-mongoid</a></p>
+
+<p>Lot of things in TODO:
+- merge more association and embedded types correct
+- rewrite hard to read code
+- tests with differents environments and mongoid versions</p>
+
+<p>Therefore, pull requests are welcome!</p>
+
+<p>Have a nice web!</p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Alexey Cherkashin</span></span>
+
+      
+
+
+
+
+<time class='entry-date' datetime='2015-03-07T22:18:42+02:00'><span class='date'><span class='date-month'>Mar</span> <span class='date-day'>7</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>10:18 pm</span></time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/gems/'>gems</a>, <a class='category' href='/blog/categories/ruby/'>ruby</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://goodniceweb.com/ruby/gems/merge-model-instances/" data-via="" data-counturl="http://goodniceweb.com/ruby/gems/merge-model-instances/" >Tweet</a>
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/ruby/rails/3-typical-mistakes-on-bundle-install-command/" title="Previous Post: 3 typical mistakes on bundle install command">&laquo; 3 typical mistakes on bundle install command</a>
+      
+      
+        <a class="basic-alignment right" href="/ruby/rails/deploying-of-one-app/" title="Next Post: deploying of one app">deploying of one app &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/docker/lets-place-jenkins-for-rails-into-docker/">Let&#8217;s Place Jenkins for Rails Into Docker</a>
+      </li>
+    
+      <li class="post">
+        <a href="/ruby/rails/deploying-of-one-app/">Deploying of One App</a>
+      </li>
+    
+      <li class="post">
+        <a href="/ruby/gems/merge-model-instances/">Merge Model Instances</a>
+      </li>
+    
+      <li class="post">
+        <a href="/ruby/rails/3-typical-mistakes-on-bundle-install-command/">3 Typical Mistakes on Bundle Install Command</a>
+      </li>
+    
+  </ul>
+</section>
+
+<section>
+  <h1>GitHub</h1>
+  
+  <a href="https://github.com/goodniceweb">@goodniceweb</a> on GitHub
+  
+  </section>
+
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2015 - Alexey Cherkashin -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = '//platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

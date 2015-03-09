@@ -1,0 +1,375 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>3 Typical Mistakes on Bundle Install Command - GoodNiceWeb</title>
+  <meta name="author" content="Alexey Cherkashin">
+
+  
+  <meta name="description" content="1. Old rubygem One day I tried to bundle install like always, but… I had it error 1
+2
+ERROR: While executing gem ... (Gem::RemoteFetcher:: &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://goodniceweb.com/ruby/rails/3-typical-mistakes-on-bundle-install-command">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="GoodNiceWeb" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="//fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="//fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">GoodNiceWeb</a></h1>
+  
+    <h2>Let&#8217;s make web better together!</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="https://www.google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:goodniceweb.com" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">3 Typical Mistakes on Bundle Install Command</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2014-11-29T19:51:13+02:00'><span class='date'><span class='date-month'>Nov</span> <span class='date-day'>29</span><span class='date-suffix'>th</span>, <span class='date-year'>2014</span></span> <span class='time'>7:51 pm</span></time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><h2>1. Old rubygem</h2>
+
+<p>One day I tried to <code>bundle install</code> like always, but… I had it error</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>ERROR:  While executing gem ... <span class="o">(</span>Gem::RemoteFetcher::UnknownHostError<span class="o">)</span>
+</span><span class='line'>    no such name <span class="o">(</span>https://api.rubygems.org/gems/%any_gem_as_you_want-version%<span class="o">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>…instead new gems. Of course, I had not problem with <code>gem '%any_gem_as_you_want-version%'</code>. It was smth. else.</p>
+
+<p>Fast googling show me that can catch it error for many reasons. In a my case to resolve a problem I need only update rubygem in single command:</p>
+
+<!--more-->
+
+
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>gem update --system
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Also I find that some of gems can be too old for new rubygem. You can check it by <code>gem outdated</code> command. If it retrieve you smth., maybe you find useful to update it gems by <code>gem update %gem_name%</code></p>
+
+<h2>2. Nokogiri error</h2>
+
+<p>When I installed nokorigi gem I had an error with big backtrace:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>Building nokogiri using packaged libraries.
+</span><span class='line'>Building libxml2-2.8.0 <span class="k">for</span> nokogiri with the following patches applied:
+</span><span class='line'>        - 0001-Fix-parser-local-buffers-size-problems.patch
+</span><span class='line'>        - 0002-Fix-entities-local-buffers-size-problems.patch
+</span><span class='line'>        - 0003-Fix-an-error-in-previous-commit.patch
+</span><span class='line'>        - 0004-Fix-potential-out-of-bound-access.patch
+</span><span class='line'>        - 0005-Detect-excessive-entities-expansion-upon-replacement.patch
+</span><span class='line'>        - 0006-Do-not-fetch-external-parsed-entities.patch
+</span><span class='line'>        - 0007-Enforce-XML_PARSER_EOF-state-handling-through-the-pa.patch
+</span><span class='line'>        - 0008-Improve-handling-of-xmlStopParser.patch
+</span><span class='line'>        - 0009-Fix-a-couple-of-return-without-value.patch
+</span><span class='line'>        - 0010-Keep-non-significant-blanks-node-in-HTML-parser.patch
+</span><span class='line'>        - 0011-Do-not-fetch-external-parameter-entities.patch
+</span><span class='line'>************************************************************************
+</span><span class='line'>IMPORTANT!  Nokogiri builds and uses a packaged version of libxml2.
+</span><span class='line'>
+</span><span class='line'>If this is a concern <span class="k">for</span> you and you want to use the system library
+</span><span class='line'>instead, abort this installation process and reinstall nokogiri as
+</span><span class='line'>follows:
+</span><span class='line'>
+</span><span class='line'>    gem install nokogiri -- --use-system-libraries
+</span><span class='line'>
+</span><span class='line'>If you are using Bundler, tell it to use the option:
+</span><span class='line'>
+</span><span class='line'>    bundle config build.nokogiri --use-system-libraries
+</span><span class='line'>    bundle install
+</span><span class='line'>
+</span><span class='line'>However, note that nokogiri does not necessarily support all versions
+</span><span class='line'>of libxml2.
+</span><span class='line'>
+</span><span class='line'>For example, libxml2-2.9.0 and higher are currently known to be broken
+</span><span class='line'>and thus unsupported by nokogiri, due to compatibility problems and
+</span><span class='line'>XPath optimization bugs.
+</span><span class='line'>************************************************************************
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><strong>This is solution:</strong></p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>sudo apt-get install libxslt1-dev
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>3. Rmagick</h2>
+
+<p>With rmagick I retrieve similar problem:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>I have trouble with it:
+</span><span class='line'>Gem::Ext::BuildError: ERROR: Failed to build gem native extension.
+</span><span class='line'>
+</span><span class='line'>    /home/adminuser/.rvm/rubies/ruby-2.1.1/bin/ruby extconf.rb
+</span><span class='line'>checking <span class="k">for</span> Ruby version &gt;<span class="o">=</span> 1.8.5... yes
+</span><span class='line'>checking <span class="k">for</span> gcc... yes
+</span><span class='line'>checking <span class="k">for</span> Magick-config... no
+</span><span class='line'>Can<span class="s1">&#39;t install RMagick 2.13.2. Can&#39;</span>t find Magick-config in /home/adminuser/.rvm/gems/ruby-2.1.1/bin:/home/adminuser/.rvm/gems/ruby-2.1.1@global/bin:/home/adminuser/.rvm/rubies/ruby-2.1.1/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/home/adminuser/.rvm/bin:/home/adminuser/.rvm/bin
+</span><span class='line'>
+</span><span class='line'>*** extconf.rb failed ***
+</span><span class='line'>Could not create Makefile due to some reason, probably lack of necessary
+</span><span class='line'>libraries and/or headers.  Check the mkmf.log file <span class="k">for</span> more details.  You may
+</span><span class='line'>need configuration options.
+</span><span class='line'>
+</span><span class='line'>Provided configuration options:
+</span><span class='line'>
+</span><span class='line'>extconf failed, <span class="nb">exit </span>code <span class="m">1</span>
+</span><span class='line'>
+</span><span class='line'>Gem files will remain installed in /home/adminuser/.rvm/gems/ruby-2.1.1/gems/rmagick-2.13.2 <span class="k">for</span> inspection.
+</span><span class='line'>Results logged to /home/adminuser/.rvm/gems/ruby-2.1.1/extensions/x86-linux/2.1.0/rmagick-2.13.2/gem_make.out
+</span><span class='line'>An error occurred <span class="k">while</span> installing rmagick <span class="o">(</span>2.13.2<span class="o">)</span>, and Bundler cannot <span class="k">continue</span>.
+</span><span class='line'>Make sure that <span class="sb">`</span>gem install rmagick -v <span class="s1">&#39;2.13.2&#39;</span><span class="sb">`</span> succeeds before bundling.
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Here is solution (be dangerous, it need over 180MB free space):</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>sudo apt-get install imagemagick libmagickwand-dev
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Have a nice web!</p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Alexey Cherkashin</span></span>
+
+      
+
+
+
+
+<time class='entry-date' datetime='2014-11-29T19:51:13+02:00'><span class='date'><span class='date-month'>Nov</span> <span class='date-day'>29</span><span class='date-suffix'>th</span>, <span class='date-year'>2014</span></span> <span class='time'>7:51 pm</span></time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/rails/'>rails</a>, <a class='category' href='/blog/categories/ruby/'>ruby</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://goodniceweb.com/ruby/rails/3-typical-mistakes-on-bundle-install-command/" data-via="" data-counturl="http://goodniceweb.com/ruby/rails/3-typical-mistakes-on-bundle-install-command/" >Tweet</a>
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+      
+        <a class="basic-alignment right" href="/ruby/gems/merge-model-instances/" title="Next Post: Merge model instances">Merge model instances &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/docker/lets-place-jenkins-for-rails-into-docker/">Let&#8217;s Place Jenkins for Rails Into Docker</a>
+      </li>
+    
+      <li class="post">
+        <a href="/ruby/rails/deploying-of-one-app/">Deploying of One App</a>
+      </li>
+    
+      <li class="post">
+        <a href="/ruby/gems/merge-model-instances/">Merge Model Instances</a>
+      </li>
+    
+      <li class="post">
+        <a href="/ruby/rails/3-typical-mistakes-on-bundle-install-command/">3 Typical Mistakes on Bundle Install Command</a>
+      </li>
+    
+  </ul>
+</section>
+
+<section>
+  <h1>GitHub</h1>
+  
+  <a href="https://github.com/goodniceweb">@goodniceweb</a> on GitHub
+  
+  </section>
+
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2015 - Alexey Cherkashin -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = '//platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

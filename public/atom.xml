@@ -1,0 +1,348 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[GoodNiceWeb]]></title>
+  <link href="http://goodniceweb.com/atom.xml" rel="self"/>
+  <link href="http://goodniceweb.com/"/>
+  <updated>2015-03-08T16:24:47+02:00</updated>
+  <id>http://goodniceweb.com/</id>
+  <author>
+    <name><![CDATA[Alexey Cherkashin]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Let's Place Jenkins for Rails Into Docker]]></title>
+    <link href="http://goodniceweb.com/docker/lets-place-jenkins-for-rails-into-docker/"/>
+    <updated>2015-03-08T15:28:30+02:00</updated>
+    <id>http://goodniceweb.com/docker/lets-place-jenkins-for-rails-into-docker</id>
+    <content type="html"><![CDATA[<h1>intro, todo</h1>
+
+<p>I prefer to use <code>rvm</code> instead of <code>rbenv</code>. For now I <a href="http://stackoverflow.com/questions/26217766/download-key-with-gpg-recv-key-and-simultaneously-check-fingerprint-in-a-scr">can&rsquo;t</a> <a href="http://stackoverflow.com/questions/20909111/adding-gpg-key-inside-docker-container-causes-no-valid-openpgp-data-found">find</a> convenient way to add gpg key into docker container by Dockerfile (solution from SO not work for me)</p>
+
+<p>Fortunally, docker allow to do all by hands.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Deploying of One App]]></title>
+    <link href="http://goodniceweb.com/ruby/rails/deploying-of-one-app/"/>
+    <updated>2015-03-08T00:57:32+02:00</updated>
+    <id>http://goodniceweb.com/ruby/rails/deploying-of-one-app</id>
+    <content type="html"><![CDATA[<p>I have Rails 4.1.8 app. One day I want to deploy it in production. Used <code>capistrano (3.3.5)</code> for it.</p>
+
+<p>On server I used Apache2 + Passenger (4.0.59). Install of apache module was fine as usual. But on visit web it raise <code>stdin is not a tty</code> passenger error. I looked into <a href="https://code.google.com/p/phusion-passenger/issues/detail?id=891">few</a> <a href="https://code.google.com/p/phusion-passenger/issues/detail?id=891">places</a> <a href="https://code.google.com/p/phusion-passenger/issues/detail?id=914">for</a> <a href="https://github.com/phusion/passenger/issues/1129">figure out</a> problem but have not success.</p>
+
+<p>Then I removed <code>apache + passenger</code> and installed <code>nginx + unicorn</code>. It also not worked for me. Any useful info in logs - only &ldquo;500 error&rdquo;, &ldquo;smth. went wrong&rdquo;. I felt that something magical going on and disable capistrano recipies. I run it by hand like a daemon. In retrospect I see its mistake.</p>
+
+<!--more-->
+
+
+<p>Next time I tried to use <code>thin</code> instead of <code>unicorn</code> but it not worked too. With <code>puma</code> also have not results.</p>
+
+<p>Then I tried to run server manually from console and gotcha: puma was blocked by webrick with some custom settings. Here is output:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ RAILS_ENV</span><span class="o">=</span>production bundle <span class="nb">exec </span>rails <span class="nv">s</span>
+</span><span class='line'><span class="o">=</span>&gt; Booting <span class="nv">Puma</span>
+</span><span class='line'><span class="o">=</span>&gt; Rails 4.1.8 application starting in production on http://0.0.0.0:3000
+</span><span class='line'><span class="o">=</span>&gt; Run <span class="sb">`</span>rails server -h<span class="sb">`</span> <span class="k">for</span> more startup <span class="nv">options</span>
+</span><span class='line'><span class="o">=</span>&gt; Notice: server is listening on all interfaces <span class="o">(</span>0.0.0.0<span class="o">)</span>. Consider using 127.0.0.1 <span class="o">(</span>--binding option<span class="o">)</span>
+</span><span class='line'><span class="o">=</span>&gt; Ctrl-C to shutdown server
+</span><span class='line'><span class="o">[</span>2015-02-28 06:32:46<span class="o">]</span> INFO  WEBrick 1.3.1
+</span><span class='line'><span class="o">[</span>2015-02-28 06:32:46<span class="o">]</span> INFO  ruby 2.1.5 <span class="o">(</span>2014-11-13<span class="o">)</span> <span class="o">[</span>i686-linux<span class="o">]</span>
+</span><span class='line'><span class="o">[</span>2015-02-28 06:32:46<span class="o">]</span> INFO  WEBrick::HTTPServer#start: <span class="nv">pid</span><span class="o">=</span><span class="m">19659</span> <span class="nv">port</span><span class="o">=</span>2010
+</span><span class='line'>^C<span class="o">[</span>2015-02-28 06:32:54<span class="o">]</span> INFO  going to shutdown ...
+</span><span class='line'><span class="o">[</span>2015-02-28 06:32:54<span class="o">]</span> INFO  WEBrick::HTTPServer#start <span class="k">done</span>.
+</span><span class='line'>Puma 2.11.1 starting...
+</span><span class='line'>* Min threads: 0, max threads: 16
+</span><span class='line'>* Environment: production
+</span><span class='line'>* Listening on tcp://0.0.0.0:3000
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Above you can see: puma tried to initialize, reach line <code>=&gt; Ctrl-C to shutdown server</code>, than webrick interrupt her flow, initialize and block it.
+When I shut down webrick by <code>^C</code>. puma continue to initialize and everything work fine.</p>
+
+<p>I tried to search in whole rails repo, in whole source of my app and no found smth. for initialize webrick in production with such strange custom behaviour: always <code>pid=19659 port=2010</code>, always block any server you use: passenger, unicorn, thin, puma, and&hellip; webrick o_0. Here is output:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ RAILS_ENV</span><span class="o">=</span>production bundle <span class="nb">exec </span>rails s <span class="nv">webrick</span>
+</span><span class='line'><span class="o">=</span>&gt; Booting <span class="nv">WEBrick</span>
+</span><span class='line'><span class="o">=</span>&gt; Rails 4.1.8 application starting in production on http://0.0.0.0:3000
+</span><span class='line'><span class="o">=</span>&gt; Run <span class="sb">`</span>rails server -h<span class="sb">`</span> <span class="k">for</span> more startup <span class="nv">options</span>
+</span><span class='line'><span class="o">=</span>&gt; Notice: server is listening on all interfaces <span class="o">(</span>0.0.0.0<span class="o">)</span>. Consider using 127.0.0.1 <span class="o">(</span>--binding option<span class="o">)</span>
+</span><span class='line'><span class="o">=</span>&gt; Ctrl-C to shutdown server
+</span><span class='line'><span class="o">[</span>2015-02-28 06:35:31<span class="o">]</span> INFO  WEBrick 1.3.1
+</span><span class='line'><span class="o">[</span>2015-02-28 06:35:31<span class="o">]</span> INFO  ruby 2.1.5 <span class="o">(</span>2014-11-13<span class="o">)</span> <span class="o">[</span>i686-linux<span class="o">]</span>
+</span><span class='line'><span class="o">[</span>2015-02-28 06:35:31<span class="o">]</span> INFO  WEBrick::HTTPServer#start: <span class="nv">pid</span><span class="o">=</span><span class="m">19698</span> <span class="nv">port</span><span class="o">=</span>2010
+</span><span class='line'>^C<span class="o">[</span>2015-02-28 06:35:43<span class="o">]</span> INFO  going to shutdown ...
+</span><span class='line'><span class="o">[</span>2015-02-28 06:35:43<span class="o">]</span> INFO  WEBrick::HTTPServer#start <span class="k">done</span>.
+</span><span class='line'><span class="o">[</span>2015-02-28 06:35:43<span class="o">]</span> INFO  WEBrick 1.3.1
+</span><span class='line'><span class="o">[</span>2015-02-28 06:35:43<span class="o">]</span> INFO  ruby 2.1.5 <span class="o">(</span>2014-11-13<span class="o">)</span> <span class="o">[</span>i686-linux<span class="o">]</span>
+</span><span class='line'><span class="o">[</span>2015-02-28 06:35:43<span class="o">]</span> INFO  WEBrick::HTTPServer#start: <span class="nv">pid</span><span class="o">=</span><span class="m">19698</span> <span class="nv">port</span><span class="o">=</span>3000
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>I tried to upgrade my rails app to 4.1.9 - same result. Then - to 4.2.0 and it also not work.</p>
+
+<p>Btw, in development mode everything was fine.</p>
+
+<p>Guys from my team suggested to track every called line of code. I found <a href="http://ruby-doc.org//core-2.2.0/Kernel.html#method-i-set_trace_func">Kernel#set_trace_func</a> very useful for it, injected it to <code>bin/rails</code> script and thats it! Enemy was detected. Thats was <code>syntaxhighlighter</code> test from tinymce extensions.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Merge Model Instances]]></title>
+    <link href="http://goodniceweb.com/ruby/gems/merge-model-instances/"/>
+    <updated>2015-03-07T22:18:42+02:00</updated>
+    <id>http://goodniceweb.com/ruby/gems/merge-model-instances</id>
+    <content type="html"><![CDATA[<p>Sometimes we can understand that our model field required validation too late. Better late than nerer: you add validation to model and get better new records. But what we can do with old invalid data?</p>
+
+<p>Just merge it!</p>
+
+<p>Yes, I know: sometimes it can be impossible. For sensitive, personal data maybe. But sometimes it can give very good results.</p>
+
+<p>In one of my projects was need to merge customers records. There some tools for ActiveRecord:</p>
+
+<!--more-->
+
+
+<ol>
+<li><a href="https://github.com/collectiveidea/merger">https://github.com/collectiveidea/merger</a></li>
+<li><a href="https://github.com/grosser/ar_merge">https://github.com/grosser/ar_merge</a></li>
+</ol>
+
+
+<p>First - older solution, add <code>merge!</code> method to your model instance. Unmaintainable anymore.
+Second - newer solution(looks like it work with rails 4).
+All above gems provide nice features:
+- different built-in protections
+- removes merged records
+- merge associations as well</p>
+
+<p>Sounds great, but not for MongoId. For MongoId I found only <code>merge-mongoid</code>:
+<a href="https://github.com/fallanic/merge-mongoid">https://github.com/fallanic/merge-mongoid</a></p>
+
+<p>It contains almost all required things, only associations was not merged.</p>
+
+<p>For me it was important so I forked this gem and add missing feature. I also rewrite all tests, because looks like previous maintainer is not Ruby developer =)
+So, for now you will find new versions here: <a href="https://github.com/goodniceweb/merge-mongoid">https://github.com/goodniceweb/merge-mongoid</a></p>
+
+<p>Lot of things in TODO:
+- merge more association and embedded types correct
+- rewrite hard to read code
+- tests with differents environments and mongoid versions</p>
+
+<p>Therefore, pull requests are welcome!</p>
+
+<p>Have a nice web!</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[3 Typical Mistakes on Bundle Install Command]]></title>
+    <link href="http://goodniceweb.com/ruby/rails/3-typical-mistakes-on-bundle-install-command/"/>
+    <updated>2014-11-29T19:51:13+02:00</updated>
+    <id>http://goodniceweb.com/ruby/rails/3-typical-mistakes-on-bundle-install-command</id>
+    <content type="html"><![CDATA[<h2>1. Old rubygem</h2>
+
+<p>One day I tried to <code>bundle install</code> like always, but… I had it error</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>ERROR:  While executing gem ... <span class="o">(</span>Gem::RemoteFetcher::UnknownHostError<span class="o">)</span>
+</span><span class='line'>    no such name <span class="o">(</span>https://api.rubygems.org/gems/%any_gem_as_you_want-version%<span class="o">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>…instead new gems. Of course, I had not problem with <code>gem '%any_gem_as_you_want-version%'</code>. It was smth. else.</p>
+
+<p>Fast googling show me that can catch it error for many reasons. In a my case to resolve a problem I need only update rubygem in single command:</p>
+
+<!--more-->
+
+
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>gem update --system
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Also I find that some of gems can be too old for new rubygem. You can check it by <code>gem outdated</code> command. If it retrieve you smth., maybe you find useful to update it gems by <code>gem update %gem_name%</code></p>
+
+<h2>2. Nokogiri error</h2>
+
+<p>When I installed nokorigi gem I had an error with big backtrace:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>Building nokogiri using packaged libraries.
+</span><span class='line'>Building libxml2-2.8.0 <span class="k">for</span> nokogiri with the following patches applied:
+</span><span class='line'>        - 0001-Fix-parser-local-buffers-size-problems.patch
+</span><span class='line'>        - 0002-Fix-entities-local-buffers-size-problems.patch
+</span><span class='line'>        - 0003-Fix-an-error-in-previous-commit.patch
+</span><span class='line'>        - 0004-Fix-potential-out-of-bound-access.patch
+</span><span class='line'>        - 0005-Detect-excessive-entities-expansion-upon-replacement.patch
+</span><span class='line'>        - 0006-Do-not-fetch-external-parsed-entities.patch
+</span><span class='line'>        - 0007-Enforce-XML_PARSER_EOF-state-handling-through-the-pa.patch
+</span><span class='line'>        - 0008-Improve-handling-of-xmlStopParser.patch
+</span><span class='line'>        - 0009-Fix-a-couple-of-return-without-value.patch
+</span><span class='line'>        - 0010-Keep-non-significant-blanks-node-in-HTML-parser.patch
+</span><span class='line'>        - 0011-Do-not-fetch-external-parameter-entities.patch
+</span><span class='line'>************************************************************************
+</span><span class='line'>IMPORTANT!  Nokogiri builds and uses a packaged version of libxml2.
+</span><span class='line'>
+</span><span class='line'>If this is a concern <span class="k">for</span> you and you want to use the system library
+</span><span class='line'>instead, abort this installation process and reinstall nokogiri as
+</span><span class='line'>follows:
+</span><span class='line'>
+</span><span class='line'>    gem install nokogiri -- --use-system-libraries
+</span><span class='line'>
+</span><span class='line'>If you are using Bundler, tell it to use the option:
+</span><span class='line'>
+</span><span class='line'>    bundle config build.nokogiri --use-system-libraries
+</span><span class='line'>    bundle install
+</span><span class='line'>
+</span><span class='line'>However, note that nokogiri does not necessarily support all versions
+</span><span class='line'>of libxml2.
+</span><span class='line'>
+</span><span class='line'>For example, libxml2-2.9.0 and higher are currently known to be broken
+</span><span class='line'>and thus unsupported by nokogiri, due to compatibility problems and
+</span><span class='line'>XPath optimization bugs.
+</span><span class='line'>************************************************************************
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><strong>This is solution:</strong></p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>sudo apt-get install libxslt1-dev
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>3. Rmagick</h2>
+
+<p>With rmagick I retrieve similar problem:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>I have trouble with it:
+</span><span class='line'>Gem::Ext::BuildError: ERROR: Failed to build gem native extension.
+</span><span class='line'>
+</span><span class='line'>    /home/adminuser/.rvm/rubies/ruby-2.1.1/bin/ruby extconf.rb
+</span><span class='line'>checking <span class="k">for</span> Ruby version &gt;<span class="o">=</span> 1.8.5... yes
+</span><span class='line'>checking <span class="k">for</span> gcc... yes
+</span><span class='line'>checking <span class="k">for</span> Magick-config... no
+</span><span class='line'>Can<span class="s1">&#39;t install RMagick 2.13.2. Can&#39;</span>t find Magick-config in /home/adminuser/.rvm/gems/ruby-2.1.1/bin:/home/adminuser/.rvm/gems/ruby-2.1.1@global/bin:/home/adminuser/.rvm/rubies/ruby-2.1.1/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/home/adminuser/.rvm/bin:/home/adminuser/.rvm/bin
+</span><span class='line'>
+</span><span class='line'>*** extconf.rb failed ***
+</span><span class='line'>Could not create Makefile due to some reason, probably lack of necessary
+</span><span class='line'>libraries and/or headers.  Check the mkmf.log file <span class="k">for</span> more details.  You may
+</span><span class='line'>need configuration options.
+</span><span class='line'>
+</span><span class='line'>Provided configuration options:
+</span><span class='line'>
+</span><span class='line'>extconf failed, <span class="nb">exit </span>code <span class="m">1</span>
+</span><span class='line'>
+</span><span class='line'>Gem files will remain installed in /home/adminuser/.rvm/gems/ruby-2.1.1/gems/rmagick-2.13.2 <span class="k">for</span> inspection.
+</span><span class='line'>Results logged to /home/adminuser/.rvm/gems/ruby-2.1.1/extensions/x86-linux/2.1.0/rmagick-2.13.2/gem_make.out
+</span><span class='line'>An error occurred <span class="k">while</span> installing rmagick <span class="o">(</span>2.13.2<span class="o">)</span>, and Bundler cannot <span class="k">continue</span>.
+</span><span class='line'>Make sure that <span class="sb">`</span>gem install rmagick -v <span class="s1">&#39;2.13.2&#39;</span><span class="sb">`</span> succeeds before bundling.
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Here is solution (be dangerous, it need over 180MB free space):</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>sudo apt-get install imagemagick libmagickwand-dev
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Have a nice web!</p>
+]]></content>
+  </entry>
+  
+</feed>

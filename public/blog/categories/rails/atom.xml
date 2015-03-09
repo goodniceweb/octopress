@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Rails | GoodNiceWeb]]></title>
+  <link href="http://goodniceweb.com/blog/categories/rails/atom.xml" rel="self"/>
+  <link href="http://goodniceweb.com/"/>
+  <updated>2015-03-08T16:24:47+02:00</updated>
+  <id>http://goodniceweb.com/</id>
+  <author>
+    <name><![CDATA[Alexey Cherkashin]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Deploying of One App]]></title>
+    <link href="http://goodniceweb.com/ruby/rails/deploying-of-one-app/"/>
+    <updated>2015-03-08T00:57:32+02:00</updated>
+    <id>http://goodniceweb.com/ruby/rails/deploying-of-one-app</id>
+    <content type="html"><![CDATA[<p>I have Rails 4.1.8 app. One day I want to deploy it in production. Used <code>capistrano (3.3.5)</code> for it.</p>
+
+<p>On server I used Apache2 + Passenger (4.0.59). Install of apache module was fine as usual. But on visit web it raise <code>stdin is not a tty</code> passenger error. I looked into <a href="https://code.google.com/p/phusion-passenger/issues/detail?id=891">few</a> <a href="https://code.google.com/p/phusion-passenger/issues/detail?id=891">places</a> <a href="https://code.google.com/p/phusion-passenger/issues/detail?id=914">for</a> <a href="https://github.com/phusion/passenger/issues/1129">figure out</a> problem but have not success.</p>
+
+<p>Then I removed <code>apache + passenger</code> and installed <code>nginx + unicorn</code>. It also not worked for me. Any useful info in logs - only &ldquo;500 error&rdquo;, &ldquo;smth. went wrong&rdquo;. I felt that something magical going on and disable capistrano recipies. I run it by hand like a daemon. In retrospect I see its mistake.</p>
+
+<!--more-->
+
+
+<p>Next time I tried to use <code>thin</code> instead of <code>unicorn</code> but it not worked too. With <code>puma</code> also have not results.</p>
+
+<p>Then I tried to run server manually from console and gotcha: puma was blocked by webrick with some custom settings. Here is output:</p>
+
+<pre><code class="bash">$ RAILS_ENV=production bundle exec rails s      
+=&gt; Booting Puma
+=&gt; Rails 4.1.8 application starting in production on http://0.0.0.0:3000
+=&gt; Run `rails server -h` for more startup options
+=&gt; Notice: server is listening on all interfaces (0.0.0.0). Consider using 127.0.0.1 (--binding option)
+=&gt; Ctrl-C to shutdown server
+[2015-02-28 06:32:46] INFO  WEBrick 1.3.1
+[2015-02-28 06:32:46] INFO  ruby 2.1.5 (2014-11-13) [i686-linux]
+[2015-02-28 06:32:46] INFO  WEBrick::HTTPServer#start: pid=19659 port=2010
+^C[2015-02-28 06:32:54] INFO  going to shutdown ...
+[2015-02-28 06:32:54] INFO  WEBrick::HTTPServer#start done.
+Puma 2.11.1 starting...
+* Min threads: 0, max threads: 16
+* Environment: production
+* Listening on tcp://0.0.0.0:3000
+</code></pre>
+
+<p>Above you can see: puma tried to initialize, reach line <code>=&gt; Ctrl-C to shutdown server</code>, than webrick interrupt her flow, initialize and block it.
+When I shut down webrick by <code>^C</code>. puma continue to initialize and everything work fine.</p>
+
+<p>I tried to search in whole rails repo, in whole source of my app and no found smth. for initialize webrick in production with such strange custom behaviour: always <code>pid=19659 port=2010</code>, always block any server you use: passenger, unicorn, thin, puma, and&hellip; webrick o_0. Here is output:</p>
+
+<pre><code class="bash">$ RAILS_ENV=production bundle exec rails s webrick
+=&gt; Booting WEBrick
+=&gt; Rails 4.1.8 application starting in production on http://0.0.0.0:3000
+=&gt; Run `rails server -h` for more startup options
+=&gt; Notice: server is listening on all interfaces (0.0.0.0). Consider using 127.0.0.1 (--binding option)
+=&gt; Ctrl-C to shutdown server
+[2015-02-28 06:35:31] INFO  WEBrick 1.3.1
+[2015-02-28 06:35:31] INFO  ruby 2.1.5 (2014-11-13) [i686-linux]
+[2015-02-28 06:35:31] INFO  WEBrick::HTTPServer#start: pid=19698 port=2010
+^C[2015-02-28 06:35:43] INFO  going to shutdown ...
+[2015-02-28 06:35:43] INFO  WEBrick::HTTPServer#start done.
+[2015-02-28 06:35:43] INFO  WEBrick 1.3.1
+[2015-02-28 06:35:43] INFO  ruby 2.1.5 (2014-11-13) [i686-linux]
+[2015-02-28 06:35:43] INFO  WEBrick::HTTPServer#start: pid=19698 port=3000
+</code></pre>
+
+<p>I tried to upgrade my rails app to 4.1.9 - same result. Then - to 4.2.0 and it also not work.</p>
+
+<p>Btw, in development mode everything was fine.</p>
+
+<p>Guys from my team suggested to track every called line of code. I found <a href="http://ruby-doc.org//core-2.2.0/Kernel.html#method-i-set_trace_func">Kernel#set_trace_func</a> very useful for it, injected it to <code>bin/rails</code> script and thats it! Enemy was detected. Thats was <code>syntaxhighlighter</code> test from tinymce extensions.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[3 Typical Mistakes on Bundle Install Command]]></title>
+    <link href="http://goodniceweb.com/ruby/rails/3-typical-mistakes-on-bundle-install-command/"/>
+    <updated>2014-11-29T19:51:13+02:00</updated>
+    <id>http://goodniceweb.com/ruby/rails/3-typical-mistakes-on-bundle-install-command</id>
+    <content type="html"><![CDATA[<h2>1. Old rubygem</h2>
+
+<p>One day I tried to <code>bundle install</code> like always, but… I had it error</p>
+
+<pre><code class="bash">ERROR:  While executing gem ... (Gem::RemoteFetcher::UnknownHostError)
+    no such name (https://api.rubygems.org/gems/%any_gem_as_you_want-version%)
+</code></pre>
+
+<p>…instead new gems. Of course, I had not problem with <code>gem '%any_gem_as_you_want-version%'</code>. It was smth. else.</p>
+
+<p>Fast googling show me that can catch it error for many reasons. In a my case to resolve a problem I need only update rubygem in single command:</p>
+
+<!--more-->
+
+
+<pre><code class="bash">gem update --system
+</code></pre>
+
+<p>Also I find that some of gems can be too old for new rubygem. You can check it by <code>gem outdated</code> command. If it retrieve you smth., maybe you find useful to update it gems by <code>gem update %gem_name%</code></p>
+
+<h2>2. Nokogiri error</h2>
+
+<p>When I installed nokorigi gem I had an error with big backtrace:</p>
+
+<pre><code class="bash">Building nokogiri using packaged libraries.
+Building libxml2-2.8.0 for nokogiri with the following patches applied:
+        - 0001-Fix-parser-local-buffers-size-problems.patch
+        - 0002-Fix-entities-local-buffers-size-problems.patch
+        - 0003-Fix-an-error-in-previous-commit.patch
+        - 0004-Fix-potential-out-of-bound-access.patch
+        - 0005-Detect-excessive-entities-expansion-upon-replacement.patch
+        - 0006-Do-not-fetch-external-parsed-entities.patch
+        - 0007-Enforce-XML_PARSER_EOF-state-handling-through-the-pa.patch
+        - 0008-Improve-handling-of-xmlStopParser.patch
+        - 0009-Fix-a-couple-of-return-without-value.patch
+        - 0010-Keep-non-significant-blanks-node-in-HTML-parser.patch
+        - 0011-Do-not-fetch-external-parameter-entities.patch
+************************************************************************
+IMPORTANT!  Nokogiri builds and uses a packaged version of libxml2.
+
+If this is a concern for you and you want to use the system library
+instead, abort this installation process and reinstall nokogiri as
+follows:
+
+    gem install nokogiri -- --use-system-libraries
+
+If you are using Bundler, tell it to use the option:
+
+    bundle config build.nokogiri --use-system-libraries
+    bundle install
+
+However, note that nokogiri does not necessarily support all versions
+of libxml2.
+
+For example, libxml2-2.9.0 and higher are currently known to be broken
+and thus unsupported by nokogiri, due to compatibility problems and
+XPath optimization bugs.
+************************************************************************
+</code></pre>
+
+<p><strong>This is solution:</strong></p>
+
+<pre><code class="bash">sudo apt-get install libxslt1-dev
+</code></pre>
+
+<h2>3. Rmagick</h2>
+
+<p>With rmagick I retrieve similar problem:</p>
+
+<pre><code class="bash">I have trouble with it:
+Gem::Ext::BuildError: ERROR: Failed to build gem native extension.
+
+    /home/adminuser/.rvm/rubies/ruby-2.1.1/bin/ruby extconf.rb                                    
+checking for Ruby version &gt;= 1.8.5... yes                                                         
+checking for gcc... yes                                                                           
+checking for Magick-config... no                                                                  
+Can't install RMagick 2.13.2. Can't find Magick-config in /home/adminuser/.rvm/gems/ruby-2.1.1/bin:/home/adminuser/.rvm/gems/ruby-2.1.1@global/bin:/home/adminuser/.rvm/rubies/ruby-2.1.1/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/home/adminuser/.rvm/bin:/home/adminuser/.rvm/bin                                                                                 
+
+*** extconf.rb failed ***                                                                         
+Could not create Makefile due to some reason, probably lack of necessary                          
+libraries and/or headers.  Check the mkmf.log file for more details.  You may                     
+need configuration options.                                                                       
+
+Provided configuration options:                                                                   
+
+extconf failed, exit code 1                                                                       
+
+Gem files will remain installed in /home/adminuser/.rvm/gems/ruby-2.1.1/gems/rmagick-2.13.2 for inspection.                                                                                         
+Results logged to /home/adminuser/.rvm/gems/ruby-2.1.1/extensions/x86-linux/2.1.0/rmagick-2.13.2/gem_make.out                                                                                       
+An error occurred while installing rmagick (2.13.2), and Bundler cannot continue.
+Make sure that `gem install rmagick -v '2.13.2'` succeeds before bundling.
+</code></pre>
+
+<p>Here is solution (be dangerous, it need over 180MB free space):</p>
+
+<pre><code class="bash">sudo apt-get install imagemagick libmagickwand-dev
+</code></pre>
+
+<p>Have a nice web!</p>
+]]></content>
+  </entry>
+  
+</feed>

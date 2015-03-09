@@ -1,0 +1,303 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>GoodNiceWeb</title>
+  <meta name="author" content="Alexey Cherkashin">
+
+  
+  <meta name="description" content="intro, todo I prefer to use rvm instead of rbenv. For now I can&rsquo;t find convenient way to add gpg key into docker container by Dockerfile ( &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://goodniceweb.com">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="GoodNiceWeb" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="//fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="//fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">GoodNiceWeb</a></h1>
+  
+    <h2>Let&#8217;s make web better together!</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="https://www.google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:goodniceweb.com" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div class="blog-index">
+  
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/docker/lets-place-jenkins-for-rails-into-docker/">Let&#8217;s Place Jenkins for Rails Into Docker</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2015-03-08T15:28:30+02:00'><span class='date'><span class='date-month'>Mar</span> <span class='date-day'>8</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>3:28 pm</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><h1>intro, todo</h1>
+
+<p>I prefer to use <code>rvm</code> instead of <code>rbenv</code>. For now I <a href="http://stackoverflow.com/questions/26217766/download-key-with-gpg-recv-key-and-simultaneously-check-fingerprint-in-a-scr">can&rsquo;t</a> <a href="http://stackoverflow.com/questions/20909111/adding-gpg-key-inside-docker-container-causes-no-valid-openpgp-data-found">find</a> convenient way to add gpg key into docker container by Dockerfile (solution from SO not work for me)</p>
+
+<p>Fortunally, docker allow to do all by hands.</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/ruby/rails/deploying-of-one-app/">Deploying of One App</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2015-03-08T00:57:32+02:00'><span class='date'><span class='date-month'>Mar</span> <span class='date-day'>8</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>12:57 am</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>I have Rails 4.1.8 app. One day I want to deploy it in production. Used <code>capistrano (3.3.5)</code> for it.</p>
+
+<p>On server I used Apache2 + Passenger (4.0.59). Install of apache module was fine as usual. But on visit web it raise <code>stdin is not a tty</code> passenger error. I looked into <a href="https://code.google.com/p/phusion-passenger/issues/detail?id=891">few</a> <a href="https://code.google.com/p/phusion-passenger/issues/detail?id=891">places</a> <a href="https://code.google.com/p/phusion-passenger/issues/detail?id=914">for</a> <a href="https://github.com/phusion/passenger/issues/1129">figure out</a> problem but have not success.</p>
+
+<p>Then I removed <code>apache + passenger</code> and installed <code>nginx + unicorn</code>. It also not worked for me. Any useful info in logs - only &ldquo;500 error&rdquo;, &ldquo;smth. went wrong&rdquo;. I felt that something magical going on and disable capistrano recipies. I run it by hand like a daemon. In retrospect I see its mistake.</p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/ruby/rails/deploying-of-one-app/">Read more &rarr;</a>
+    </footer>
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/ruby/gems/merge-model-instances/">Merge Model Instances</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2015-03-07T22:18:42+02:00'><span class='date'><span class='date-month'>Mar</span> <span class='date-day'>7</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>10:18 pm</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Sometimes we can understand that our model field required validation too late. Better late than nerer: you add validation to model and get better new records. But what we can do with old invalid data?</p>
+
+<p>Just merge it!</p>
+
+<p>Yes, I know: sometimes it can be impossible. For sensitive, personal data maybe. But sometimes it can give very good results.</p>
+
+<p>In one of my projects was need to merge customers records. There some tools for ActiveRecord:</p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/ruby/gems/merge-model-instances/">Read more &rarr;</a>
+    </footer>
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/ruby/rails/3-typical-mistakes-on-bundle-install-command/">3 Typical Mistakes on Bundle Install Command</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2014-11-29T19:51:13+02:00'><span class='date'><span class='date-month'>Nov</span> <span class='date-day'>29</span><span class='date-suffix'>th</span>, <span class='date-year'>2014</span></span> <span class='time'>7:51 pm</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><h2>1. Old rubygem</h2>
+
+<p>One day I tried to <code>bundle install</code> like always, but… I had it error</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>ERROR:  While executing gem ... <span class="o">(</span>Gem::RemoteFetcher::UnknownHostError<span class="o">)</span>
+</span><span class='line'>    no such name <span class="o">(</span>https://api.rubygems.org/gems/%any_gem_as_you_want-version%<span class="o">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>…instead new gems. Of course, I had not problem with <code>gem '%any_gem_as_you_want-version%'</code>. It was smth. else.</p>
+
+<p>Fast googling show me that can catch it error for many reasons. In a my case to resolve a problem I need only update rubygem in single command:</p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/ruby/rails/3-typical-mistakes-on-bundle-install-command/">Read more &rarr;</a>
+    </footer>
+  
+
+
+    </article>
+  
+  <div class="pagination">
+    
+    <a href="/blog/archives">Blog Archives</a>
+    
+  </div>
+</div>
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/docker/lets-place-jenkins-for-rails-into-docker/">Let&#8217;s Place Jenkins for Rails Into Docker</a>
+      </li>
+    
+      <li class="post">
+        <a href="/ruby/rails/deploying-of-one-app/">Deploying of One App</a>
+      </li>
+    
+      <li class="post">
+        <a href="/ruby/gems/merge-model-instances/">Merge Model Instances</a>
+      </li>
+    
+      <li class="post">
+        <a href="/ruby/rails/3-typical-mistakes-on-bundle-install-command/">3 Typical Mistakes on Bundle Install Command</a>
+      </li>
+    
+  </ul>
+</section>
+
+<section>
+  <h1>GitHub</h1>
+  
+  <a href="https://github.com/goodniceweb">@goodniceweb</a> on GitHub
+  
+  </section>
+
+
+
+
+
+  
+</aside>
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2015 - Alexey Cherkashin -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = '//platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

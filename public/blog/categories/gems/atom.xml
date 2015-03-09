@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Gems | GoodNiceWeb]]></title>
+  <link href="http://goodniceweb.com/blog/categories/gems/atom.xml" rel="self"/>
+  <link href="http://goodniceweb.com/"/>
+  <updated>2015-03-08T16:24:47+02:00</updated>
+  <id>http://goodniceweb.com/</id>
+  <author>
+    <name><![CDATA[Alexey Cherkashin]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Merge Model Instances]]></title>
+    <link href="http://goodniceweb.com/ruby/gems/merge-model-instances/"/>
+    <updated>2015-03-07T22:18:42+02:00</updated>
+    <id>http://goodniceweb.com/ruby/gems/merge-model-instances</id>
+    <content type="html"><![CDATA[<p>Sometimes we can understand that our model field required validation too late. Better late than nerer: you add validation to model and get better new records. But what we can do with old invalid data?</p>
+
+<p>Just merge it!</p>
+
+<p>Yes, I know: sometimes it can be impossible. For sensitive, personal data maybe. But sometimes it can give very good results.</p>
+
+<p>In one of my projects was need to merge customers records. There some tools for ActiveRecord:</p>
+
+<!--more-->
+
+
+<ol>
+<li><a href="https://github.com/collectiveidea/merger">https://github.com/collectiveidea/merger</a></li>
+<li><a href="https://github.com/grosser/ar_merge">https://github.com/grosser/ar_merge</a></li>
+</ol>
+
+
+<p>First - older solution, add <code>merge!</code> method to your model instance. Unmaintainable anymore.
+Second - newer solution(looks like it work with rails 4).
+All above gems provide nice features:
+- different built-in protections
+- removes merged records
+- merge associations as well</p>
+
+<p>Sounds great, but not for MongoId. For MongoId I found only <code>merge-mongoid</code>:
+<a href="https://github.com/fallanic/merge-mongoid">https://github.com/fallanic/merge-mongoid</a></p>
+
+<p>It contains almost all required things, only associations was not merged.</p>
+
+<p>For me it was important so I forked this gem and add missing feature. I also rewrite all tests, because looks like previous maintainer is not Ruby developer =)
+So, for now you will find new versions here: <a href="https://github.com/goodniceweb/merge-mongoid">https://github.com/goodniceweb/merge-mongoid</a></p>
+
+<p>Lot of things in TODO:
+- merge more association and embedded types correct
+- rewrite hard to read code
+- tests with differents environments and mongoid versions</p>
+
+<p>Therefore, pull requests are welcome!</p>
+
+<p>Have a nice web!</p>
+]]></content>
+  </entry>
+  
+</feed>
