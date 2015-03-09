@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: Docker | GoodNiceWeb]]></title>
-  <link href="http://goodniceweb.com/blog/categories/docker/atom.xml" rel="self"/>
-  <link href="http://goodniceweb.com/"/>
-  <updated>2015-03-08T16:24:47+02:00</updated>
-  <id>http://goodniceweb.com/</id>
+  <link href="http://goodniceweb.me/blog/categories/docker/atom.xml" rel="self"/>
+  <link href="http://goodniceweb.me/"/>
+  <updated>2015-03-09T20:49:03+02:00</updated>
+  <id>http://goodniceweb.me/</id>
   <author>
     <name><![CDATA[Alexey Cherkashin]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Let's Place Jenkins for Rails Into Docker]]></title>
-    <link href="http://goodniceweb.com/docker/lets-place-jenkins-for-rails-into-docker/"/>
+    <link href="http://goodniceweb.me/docker/lets-place-jenkins-for-rails-into-docker/"/>
     <updated>2015-03-08T15:28:30+02:00</updated>
-    <id>http://goodniceweb.com/docker/lets-place-jenkins-for-rails-into-docker</id>
+    <id>http://goodniceweb.me/docker/lets-place-jenkins-for-rails-into-docker</id>
     <content type="html"><![CDATA[<h1>intro, todo</h1>
 
 <p>I prefer to use <code>rvm</code> instead of <code>rbenv</code>. For now I <a href="http://stackoverflow.com/questions/26217766/download-key-with-gpg-recv-key-and-simultaneously-check-fingerprint-in-a-scr">can&rsquo;t</a> <a href="http://stackoverflow.com/questions/20909111/adding-gpg-key-inside-docker-container-causes-no-valid-openpgp-data-found">find</a> convenient way to add gpg key into docker container by Dockerfile (solution from SO not work for me)</p>

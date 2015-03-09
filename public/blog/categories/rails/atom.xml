@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: Rails | GoodNiceWeb]]></title>
-  <link href="http://goodniceweb.com/blog/categories/rails/atom.xml" rel="self"/>
-  <link href="http://goodniceweb.com/"/>
-  <updated>2015-03-08T16:24:47+02:00</updated>
-  <id>http://goodniceweb.com/</id>
+  <link href="http://goodniceweb.me/blog/categories/rails/atom.xml" rel="self"/>
+  <link href="http://goodniceweb.me/"/>
+  <updated>2015-03-09T20:49:03+02:00</updated>
+  <id>http://goodniceweb.me/</id>
   <author>
     <name><![CDATA[Alexey Cherkashin]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Deploying of One App]]></title>
-    <link href="http://goodniceweb.com/ruby/rails/deploying-of-one-app/"/>
+    <link href="http://goodniceweb.me/ruby/rails/deploying-of-one-app/"/>
     <updated>2015-03-08T00:57:32+02:00</updated>
-    <id>http://goodniceweb.com/ruby/rails/deploying-of-one-app</id>
+    <id>http://goodniceweb.me/ruby/rails/deploying-of-one-app</id>
     <content type="html"><![CDATA[<p>I have Rails 4.1.8 app. One day I want to deploy it in production. Used <code>capistrano (3.3.5)</code> for it.</p>
 
 <p>On server I used Apache2 + Passenger (4.0.59). Install of apache module was fine as usual. But on visit web it raise <code>stdin is not a tty</code> passenger error. I looked into <a href="https://code.google.com/p/phusion-passenger/issues/detail?id=891">few</a> <a href="https://code.google.com/p/phusion-passenger/issues/detail?id=891">places</a> <a href="https://code.google.com/p/phusion-passenger/issues/detail?id=914">for</a> <a href="https://github.com/phusion/passenger/issues/1129">figure out</a> problem but have not success.</p>
@@ -79,9 +79,9 @@ When I shut down webrick by <code>^C</code>. puma continue to initialize and eve
   
   <entry>
     <title type="html"><![CDATA[3 Typical Mistakes on Bundle Install Command]]></title>
-    <link href="http://goodniceweb.com/ruby/rails/3-typical-mistakes-on-bundle-install-command/"/>
+    <link href="http://goodniceweb.me/ruby/rails/3-typical-mistakes-on-bundle-install-command/"/>
     <updated>2014-11-29T19:51:13+02:00</updated>
-    <id>http://goodniceweb.com/ruby/rails/3-typical-mistakes-on-bundle-install-command</id>
+    <id>http://goodniceweb.me/ruby/rails/3-typical-mistakes-on-bundle-install-command</id>
     <content type="html"><![CDATA[<h2>1. Old rubygem</h2>
 
 <p>One day I tried to <code>bundle install</code> like always, but… I had it error</p>
