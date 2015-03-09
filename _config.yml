@@ -2,9 +2,9 @@
 #      Main Configs       #
 # ----------------------- #
 
-url: http://goodniceweb.com
+url: http://goodniceweb.me
 title: GoodNiceWeb
-subtitle: Let's make web better!
+subtitle: Let's make web better together!
 author: Alexey Cherkashin
 simple_search: https://www.google.com/search
 description: Web developing with Ruby, Rails and Vim. Make a complex things simpler

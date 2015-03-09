@@ -3,7 +3,7 @@ layout: post
 title: "3 typical mistakes on bundle install command"
 date: 2014-11-29 19:51:13 +0200
 comments: true
-categories: ruby gems
+categories: ruby rails
 ---
 
 ## 1. Old rubygem
