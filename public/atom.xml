@@ -4,7 +4,7 @@
   <title><![CDATA[GoodNiceWeb]]></title>
   <link href="http://goodniceweb.me/atom.xml" rel="self"/>
   <link href="http://goodniceweb.me/"/>
-  <updated>2015-03-09T20:49:03+02:00</updated>
+  <updated>2015-03-10T23:45:57+02:00</updated>
   <id>http://goodniceweb.me/</id>
   <author>
     <name><![CDATA[Alexey Cherkashin]]></name>
@@ -12,19 +12,6 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
-  
-  <entry>
-    <title type="html"><![CDATA[Let's Place Jenkins for Rails Into Docker]]></title>
-    <link href="http://goodniceweb.me/docker/lets-place-jenkins-for-rails-into-docker/"/>
-    <updated>2015-03-08T15:28:30+02:00</updated>
-    <id>http://goodniceweb.me/docker/lets-place-jenkins-for-rails-into-docker</id>
-    <content type="html"><![CDATA[<h1>intro, todo</h1>
-
-<p>I prefer to use <code>rvm</code> instead of <code>rbenv</code>. For now I <a href="http://stackoverflow.com/questions/26217766/download-key-with-gpg-recv-key-and-simultaneously-check-fingerprint-in-a-scr">can&rsquo;t</a> <a href="http://stackoverflow.com/questions/20909111/adding-gpg-key-inside-docker-container-causes-no-valid-openpgp-data-found">find</a> convenient way to add gpg key into docker container by Dockerfile (solution from SO not work for me)</p>
-
-<p>Fortunally, docker allow to do all by hands.</p>
-]]></content>
-  </entry>
   
   <entry>
     <title type="html"><![CDATA[Deploying of One App]]></title>
