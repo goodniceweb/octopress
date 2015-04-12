@@ -24,7 +24,7 @@ RubyOnRails developer with 3 years experience in web technologies.
 |**CMS:**                   | Joomla, Wordpress, Octopress                                  | 
 |**Cloud:**                 | AWS - EC2                                                     |  
 |**Search engines:**        | Sphinx, ElasticSearch                                         | 
-|**Also:**                  | Docker, Redis, SEO, Continious Integration, DevOps            | 
+|**Also:**                  | Docker, Redis, SEO, Continuous Integration, DevOps            | 
 
 
 
@@ -35,10 +35,11 @@ RubyOnRails developer with 3 years experience in web technologies.
 |------------------|--------------------------------------------------------------------|
 |**Company name: **| Detective agency "Orlan"                                           |
 |**Role:         **| Junior Web developer                                               |
-|**Address:      **| Urkaine, Kharkov, Rimarskaya str. 19, room 32                      |
+|**Address:      **| Ukraine, Kharkov, Rimarskaya str. 19, room 32                      |
 |**Duties:       **| Layouting, CMS integration, SEO, bugfixing                         |
 
-**Achievements: ** Here I get my first web experience, meet with markup, stules, front-end scripts and have a lot of SEO experience and PHP basics. 
+**Achievements: ** Here I get my first web experience, meet with markup, stules, 
+front-end scripts and have a lot of SEO experience and PHP basics. 
 
 ### January 2014 - July 2014
 
@@ -46,7 +47,7 @@ RubyOnRails developer with 3 years experience in web technologies.
 |------------------|------------------------------------------------------------------------------|
 |**Company name: **| Detective agency "Orlan"                                                     |
 |**Role:         **| Junior RubyOnRails developer                                                 |
-|**Address:      **| Urkaine, Kharkov, Shevchenko str. 32, room 207A                              |
+|**Address:      **| Ukraine, Kharkov, Shevchenko str. 32, room 207A                              |
 |**Duties:       **| Migration from Joomla to Rails, maintenance                                  |
 
 **Achievements: ** Getting start with Rails. Rewrite CMS logic to another engine with data save.
@@ -57,11 +58,11 @@ RubyOnRails developer with 3 years experience in web technologies.
 |------------------|------------------------------------------------------------------------------|
 |**Company name: **| Sloboda studio                                                               |
 |**Role:         **| Middle Rails developer                                                       |
-|**Address:      **| Urkaine, Kharkov, Moskovs'kyi Avenue, 257                                    |
+|**Address:      **| Ukraine, Kharkov, Moskovs'kyi Avenue, 257                                    |
 |**Duties:       **| Rails projects                                                               |
 
 **Achievements:** Working with Big Data. Using a lot of accompanying technologies:
-Agile, Scrum, Docker, Continious Integration, DevOps                         
+Agile, Scrum, Docker, Continuous Integration, DevOps
 
 ## Education
 
