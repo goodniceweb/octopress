@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Tips | GoodNiceWeb]]></title>
+  <link href="http://goodniceweb.me/blog/categories/tips/atom.xml" rel="self"/>
+  <link href="http://goodniceweb.me/"/>
+  <updated>2015-04-13T14:29:12+03:00</updated>
+  <id>http://goodniceweb.me/</id>
+  <author>
+    <name><![CDATA[Alexey Cherkashin]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[5 Tips for Faster Intro to New Rails Project]]></title>
+    <link href="http://goodniceweb.me/04-12-2015/5-tips-for-faster-intro-to-new-rails-project.html"/>
+    <updated>2015-04-12T15:15:36+03:00</updated>
+    <id>http://goodniceweb.me/04-12-2015/5-tips-for-faster-intro-to-new-rails-project</id>
+    <content type="html"><![CDATA[<p>What most common problems when you receive new project? No right answer here.
+Some people find not so easy to figure out models relationships, some have troubles
+with estimates at beginning.</p>
+
+<p>Here I&rsquo;ll describe what help me to dive intro new project faster. Btw,
+<a href="https://bitly.com/a/bitlinks/1aaBwNi">here</a> my presentation which I made in five minutes
+before free talk section on <a href="http://www.meetup.com/kharkov-rb/events/221648244">RubyMeetup #12</a></p>
+
+<!-- more -->
+
+
+<h2>1. Static Analysis Tools</h2>
+
+<p>Ruby have a lot of static analysis tools, ex. <a href="https://github.com/troessner/reek">reek</a>,
+<a href="https://github.com/seattlerb/flay">flay</a>, <a href="https://github.com/yorickpeterse/ruby-lint">ruby-lint</a>,
+etc. etc. But I found most helpful for me the <a href="https://github.com/seattlerb/flog">flog</a>.
+It counts <a href="http://en.wikipedia.org/wiki/Cyclomatic_complexity">cyclomatic complexity</a> of method.
+So if you may to estimate task, which assumes working with existing code,
+you just see it&rsquo;s value of <code>flog</code> output. After that you will have one part of puzzle.</p>
+
+<p>From the other hand, flogging whole project can take much time. Here is tip for make
+static analysis easier:</p>
+
+<pre><code class="bash">flog -gm . &gt; project_name.flog
+</code></pre>
+
+<p>Than, if you need to see flog results, you just execute smth. like this:</p>
+
+<pre><code class="bash">grep ‘method_name’ *.flog
+</code></pre>
+
+<h2>2. Project History</h2>
+
+<p>Don&rsquo;t forget that <code>git log</code> have a lot of cool options. Here few of them:</p>
+
+<ul>
+<li>-p</li>
+<li>-L</li>
+<li>&ndash;author</li>
+<li>&ndash;since</li>
+<li>&ndash;until</li>
+</ul>
+
+
+<p>Also I highly recommend to use <code>git blame</code> I your favorite editor/IDE.
+I use vim. If you too, maybe you find useful <a href="https://github.com/tpope/vim-fugitive">git fugitive</a>
+plugin.</p>
+
+<p><img class="<a" src="href="https://blog.xargs.io/presentations/surviving_large_unfamiliar_codebases/images/fugitive-git-blame.png">https://blog.xargs.io/presentations/surviving_large_unfamiliar_codebases/images/fugitive-git-blame.png</a>&#8221;></p>
+
+<p>Most frequently I used <code>blame</code> with <code>flog</code> for build leaderboard of previous developers
+in my mind.</p>
+
+<p>Know project history will help you to estimate more precisely.</p>
+
+<h2>3. Routes</h2>
+
+<p>Where I can find code, which executed on this route? - one of my most common questions in new project.</p>
+
+<p>On big projects routes is permanent as usual. Everybody knows that <code>rake</code> command preload whole Rails
+environment. So I propose to execute <code>rake routes</code> once.</p>
+
+<pre><code class="bash">rake routes &gt; project_name.routes
+</code></pre>
+
+<p>After above command you can easily find project route by single line command:</p>
+
+<pre><code class="bash">grep “where_is_stupid_route” *.routes
+</code></pre>
+
+<h2>4. Graphical Representation of Schema</h2>
+
+<p>Did you whenever want to see whole bunch of models, attributes and relationships in pretty
+graphic? There is nothing easier. Few gems for this already exist.</p>
+
+<ul>
+<li><a href="https://github.com/voormedia/rails-erd">https://github.com/voormedia/rails-erd</a></li>
+<li><a href="https://github.com/preston/railroady">https://github.com/preston/railroady</a></li>
+</ul>
+
+
+<h3>Rails-erd</h3>
+
+<p><img class="<a" src="href="http://rails-erd.rubyforge.org/examples/event-forms.png">http://rails-erd.rubyforge.org/examples/event-forms.png</a>&#8221;></p>
+
+<h3>Railroady</h3>
+
+<p><img class="<a" src="href="https://camo.githubusercontent.com/c369587851d104f137a32a288f0dd3aa3614c320/68747470733a2f2f7261772e6769746875622e636f6d2f6d70656c7a736865726d616e2f63636d74762f6d61737465722f646f63732f6d6f64656c732e706e67">https://camo.githubusercontent.com/c369587851d104f137a32a288f0dd3aa3614c320/68747470733a2f2f7261772e6769746875622e636f6d2f6d70656c7a736865726d616e2f63636d74762f6d61737465722f646f63732f6d6f64656c732e706e67</a>&#8221;></p>
+
+<h2>5. Take a task!</h2>
+
+<p>Only during work you will get real experience. No another way to feel yourself comfortable in new project.</p>
+]]></content>
+  </entry>
+  
+</feed>

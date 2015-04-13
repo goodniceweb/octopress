@@ -1,0 +1,312 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>5 Tips for Faster Intro to New Rails Project - GoodNiceWeb</title>
+  <meta name="author" content="Alexey Cherkashin">
+
+  
+  <meta name="description" content="What most common problems when you receive new project? No right answer here.
+Some people find not so easy to figure out models relationships, some &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://goodniceweb.me/04-12-2015/5-tips-for-faster-intro-to-new-rails-project.html">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/stylesheets/data-table.css" media="screen, projection" rel="stylesheet" type="text/css" />
+  <link href="/atom.xml" rel="alternate" title="GoodNiceWeb" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="//fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="//fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">GoodNiceWeb</a></h1>
+  
+    <h2>Let&#8217;s make web better together!</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="https://www.google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:goodniceweb.me" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+  <li><a href="/about">About</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">5 Tips for Faster Intro to New Rails Project</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2015-04-12T15:15:36+03:00'><span class='date'><span class='date-month'>Apr</span> <span class='date-day'>12</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>3:15 pm</span></time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>What most common problems when you receive new project? No right answer here.
+Some people find not so easy to figure out models relationships, some have troubles
+with estimates at beginning.</p>
+
+<p>Here I&rsquo;ll describe what help me to dive intro new project faster. Btw,
+<a href="https://bitly.com/a/bitlinks/1aaBwNi">here</a> my presentation which I made in five minutes
+before free talk section on <a href="http://www.meetup.com/kharkov-rb/events/221648244">RubyMeetup #12</a></p>
+
+<!-- more -->
+
+
+<h2>1. Static Analysis Tools</h2>
+
+<p>Ruby have a lot of static analysis tools, ex. <a href="https://github.com/troessner/reek">reek</a>,
+<a href="https://github.com/seattlerb/flay">flay</a>, <a href="https://github.com/yorickpeterse/ruby-lint">ruby-lint</a>,
+etc. etc. But I found most helpful for me the <a href="https://github.com/seattlerb/flog">flog</a>.
+It counts <a href="http://en.wikipedia.org/wiki/Cyclomatic_complexity">cyclomatic complexity</a> of method.
+So if you may to estimate task, which assumes working with existing code,
+you just see it&rsquo;s value of <code>flog</code> output. After that you will have one part of puzzle.</p>
+
+<p>From the other hand, flogging whole project can take much time. Here is tip for make
+static analysis easier:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>flog -gm . &gt; project_name.flog
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Than, if you need to see flog results, you just execute smth. like this:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>grep ‘method_name’ *.flog
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>2. Project History</h2>
+
+<p>Don&rsquo;t forget that <code>git log</code> have a lot of cool options. Here few of them:</p>
+
+<ul>
+<li>-p</li>
+<li>-L</li>
+<li>&ndash;author</li>
+<li>&ndash;since</li>
+<li>&ndash;until</li>
+</ul>
+
+
+<p>Also I highly recommend to use <code>git blame</code> I your favorite editor/IDE.
+I use vim. If you too, maybe you find useful <a href="https://github.com/tpope/vim-fugitive">git fugitive</a>
+plugin.</p>
+
+<p><img src="https://blog.xargs.io/presentations/surviving_large_unfamiliar_codebases/images/fugitive-git-blame.png"></p>
+
+<p>Most frequently I used <code>blame</code> with <code>flog</code> for build leaderboard of previous developers
+in my mind.</p>
+
+<p>Know project history will help you to estimate more precisely.</p>
+
+<h2>3. Routes</h2>
+
+<p>Where I can find code, which executed on this route? - one of my most common questions in new project.</p>
+
+<p>On big projects routes is permanent as usual. Everybody knows that <code>rake</code> command preload whole Rails
+environment. So I propose to execute <code>rake routes</code> once.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>rake routes &gt; project_name.routes
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>After above command you can easily find project route by single line command:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>grep “where_is_stupid_route” *.routes
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>4. Graphical Representation of Schema</h2>
+
+<p>Did you whenever want to see whole bunch of models, attributes and relationships in pretty
+graphic? There is nothing easier. Few gems for this already exist.</p>
+
+<ul>
+<li><a href="https://github.com/voormedia/rails-erd">https://github.com/voormedia/rails-erd</a></li>
+<li><a href="https://github.com/preston/railroady">https://github.com/preston/railroady</a></li>
+</ul>
+
+
+<h3>Rails-erd</h3>
+
+<p><img src="http://rails-erd.rubyforge.org/examples/event-forms.png"></p>
+
+<h3>Railroady</h3>
+
+<p><img src="https://camo.githubusercontent.com/c369587851d104f137a32a288f0dd3aa3614c320/68747470733a2f2f7261772e6769746875622e636f6d2f6d70656c7a736865726d616e2f63636d74762f6d61737465722f646f63732f6d6f64656c732e706e67"></p>
+
+<h2>5. Take a task!</h2>
+
+<p>Only during work you will get real experience. No another way to feel yourself comfortable in new project.</p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Alexey Cherkashin</span></span>
+
+      
+
+
+
+
+<time class='entry-date' datetime='2015-04-12T15:15:36+03:00'><span class='date'><span class='date-month'>Apr</span> <span class='date-day'>12</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>3:15 pm</span></time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/tips/'>tips</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://goodniceweb.me/04-12-2015/5-tips-for-faster-intro-to-new-rails-project.html" data-via="goodniceweb" data-counturl="http://goodniceweb.me/04-12-2015/5-tips-for-faster-intro-to-new-rails-project.html" >Tweet</a>
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/03-08-2015/deploying-of-one-app.html" title="Previous Post: deploying of one app">&laquo; deploying of one app</a>
+      
+      
+    </p>
+  </footer>
+</article>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1><a href="/about">About Me</a></h1>
+  <p>Highly motivated RubyOnRails developer. Check more on <a href="/about">about page</a></p>
+</section>
+<section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/04-12-2015/5-tips-for-faster-intro-to-new-rails-project.html">5 Tips for Faster Intro to New Rails Project</a>
+      </li>
+    
+      <li class="post">
+        <a href="/03-08-2015/deploying-of-one-app.html">Deploying of One App</a>
+      </li>
+    
+      <li class="post">
+        <a href="/03-07-2015/merge-model-instances.html">Merge Model Instances</a>
+      </li>
+    
+      <li class="post">
+        <a href="/11-29-2014/3-typical-mistakes-on-bundle-install-command.html">3 Typical Mistakes on Bundle Install Command</a>
+      </li>
+    
+  </ul>
+</section>
+
+<section>
+  <h1>GitHub</h1>
+  
+  <a href="https://github.com/goodniceweb">@goodniceweb</a> on GitHub
+  
+  </section>
+
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2015 - Alexey Cherkashin -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = '//platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

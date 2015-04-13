@@ -4,7 +4,7 @@
   <title><![CDATA[GoodNiceWeb]]></title>
   <link href="http://goodniceweb.me/atom.xml" rel="self"/>
   <link href="http://goodniceweb.me/"/>
-  <updated>2015-04-12T15:00:37+03:00</updated>
+  <updated>2015-04-13T14:29:12+03:00</updated>
   <id>http://goodniceweb.me/</id>
   <author>
     <name><![CDATA[Alexey Cherkashin]]></name>
@@ -14,10 +14,118 @@
 
   
   <entry>
+    <title type="html"><![CDATA[5 Tips for Faster Intro to New Rails Project]]></title>
+    <link href="http://goodniceweb.me/04-12-2015/5-tips-for-faster-intro-to-new-rails-project.html"/>
+    <updated>2015-04-12T15:15:36+03:00</updated>
+    <id>http://goodniceweb.me/04-12-2015/5-tips-for-faster-intro-to-new-rails-project</id>
+    <content type="html"><![CDATA[<p>What most common problems when you receive new project? No right answer here.
+Some people find not so easy to figure out models relationships, some have troubles
+with estimates at beginning.</p>
+
+<p>Here I&rsquo;ll describe what help me to dive intro new project faster. Btw,
+<a href="https://bitly.com/a/bitlinks/1aaBwNi">here</a> my presentation which I made in five minutes
+before free talk section on <a href="http://www.meetup.com/kharkov-rb/events/221648244">RubyMeetup #12</a></p>
+
+<!-- more -->
+
+
+<h2>1. Static Analysis Tools</h2>
+
+<p>Ruby have a lot of static analysis tools, ex. <a href="https://github.com/troessner/reek">reek</a>,
+<a href="https://github.com/seattlerb/flay">flay</a>, <a href="https://github.com/yorickpeterse/ruby-lint">ruby-lint</a>,
+etc. etc. But I found most helpful for me the <a href="https://github.com/seattlerb/flog">flog</a>.
+It counts <a href="http://en.wikipedia.org/wiki/Cyclomatic_complexity">cyclomatic complexity</a> of method.
+So if you may to estimate task, which assumes working with existing code,
+you just see it&rsquo;s value of <code>flog</code> output. After that you will have one part of puzzle.</p>
+
+<p>From the other hand, flogging whole project can take much time. Here is tip for make
+static analysis easier:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>flog -gm . &gt; project_name.flog
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Than, if you need to see flog results, you just execute smth. like this:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>grep ‘method_name’ *.flog
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>2. Project History</h2>
+
+<p>Don&rsquo;t forget that <code>git log</code> have a lot of cool options. Here few of them:</p>
+
+<ul>
+<li>-p</li>
+<li>-L</li>
+<li>&ndash;author</li>
+<li>&ndash;since</li>
+<li>&ndash;until</li>
+</ul>
+
+
+<p>Also I highly recommend to use <code>git blame</code> I your favorite editor/IDE.
+I use vim. If you too, maybe you find useful <a href="https://github.com/tpope/vim-fugitive">git fugitive</a>
+plugin.</p>
+
+<p><img src="https://blog.xargs.io/presentations/surviving_large_unfamiliar_codebases/images/fugitive-git-blame.png"></p>
+
+<p>Most frequently I used <code>blame</code> with <code>flog</code> for build leaderboard of previous developers
+in my mind.</p>
+
+<p>Know project history will help you to estimate more precisely.</p>
+
+<h2>3. Routes</h2>
+
+<p>Where I can find code, which executed on this route? - one of my most common questions in new project.</p>
+
+<p>On big projects routes is permanent as usual. Everybody knows that <code>rake</code> command preload whole Rails
+environment. So I propose to execute <code>rake routes</code> once.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>rake routes &gt; project_name.routes
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>After above command you can easily find project route by single line command:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>grep “where_is_stupid_route” *.routes
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>4. Graphical Representation of Schema</h2>
+
+<p>Did you whenever want to see whole bunch of models, attributes and relationships in pretty
+graphic? There is nothing easier. Few gems for this already exist.</p>
+
+<ul>
+<li><a href="https://github.com/voormedia/rails-erd">https://github.com/voormedia/rails-erd</a></li>
+<li><a href="https://github.com/preston/railroady">https://github.com/preston/railroady</a></li>
+</ul>
+
+
+<h3>Rails-erd</h3>
+
+<p><img src="http://rails-erd.rubyforge.org/examples/event-forms.png"></p>
+
+<h3>Railroady</h3>
+
+<p><img src="https://camo.githubusercontent.com/c369587851d104f137a32a288f0dd3aa3614c320/68747470733a2f2f7261772e6769746875622e636f6d2f6d70656c7a736865726d616e2f63636d74762f6d61737465722f646f63732f6d6f64656c732e706e67"></p>
+
+<h2>5. Take a task!</h2>
+
+<p>Only during work you will get real experience. No another way to feel yourself comfortable in new project.</p>
+]]></content>
+  </entry>
+  
+  <entry>
     <title type="html"><![CDATA[Deploying of One App]]></title>
-    <link href="http://goodniceweb.me/ruby/rails/deploying-of-one-app/"/>
+    <link href="http://goodniceweb.me/03-08-2015/deploying-of-one-app.html"/>
     <updated>2015-03-08T00:57:32+02:00</updated>
-    <id>http://goodniceweb.me/ruby/rails/deploying-of-one-app</id>
+    <id>http://goodniceweb.me/03-08-2015/deploying-of-one-app</id>
     <content type="html"><![CDATA[<p>I have Rails 4.1.8 app. One day I want to deploy it in production. Used <code>capistrano (3.3.5)</code> for it.</p>
 
 <p>On server I used Apache2 + Passenger (4.0.59). Install of apache module was fine as usual. But on visit web it raise <code>stdin is not a tty</code> passenger error. I looked into <a href="https://code.google.com/p/phusion-passenger/issues/detail?id=891">few</a> <a href="https://code.google.com/p/phusion-passenger/issues/detail?id=891">places</a> <a href="https://code.google.com/p/phusion-passenger/issues/detail?id=914">for</a> <a href="https://github.com/phusion/passenger/issues/1129">figure out</a> problem but have not success.</p>
@@ -110,9 +218,9 @@ When I shut down webrick by <code>^C</code>. puma continue to initialize and eve
   
   <entry>
     <title type="html"><![CDATA[Merge Model Instances]]></title>
-    <link href="http://goodniceweb.me/ruby/gems/merge-model-instances/"/>
+    <link href="http://goodniceweb.me/03-07-2015/merge-model-instances.html"/>
     <updated>2015-03-07T22:18:42+02:00</updated>
-    <id>http://goodniceweb.me/ruby/gems/merge-model-instances</id>
+    <id>http://goodniceweb.me/03-07-2015/merge-model-instances</id>
     <content type="html"><![CDATA[<p>Sometimes we can understand that our model field required validation too late. Better late than nerer: you add validation to model and get better new records. But what we can do with old invalid data?</p>
 
 <p>Just merge it!</p>
@@ -158,9 +266,9 @@ So, for now you will find new versions here: <a href="https://github.com/goodnic
   
   <entry>
     <title type="html"><![CDATA[3 Typical Mistakes on Bundle Install Command]]></title>
-    <link href="http://goodniceweb.me/ruby/rails/3-typical-mistakes-on-bundle-install-command/"/>
+    <link href="http://goodniceweb.me/11-29-2014/3-typical-mistakes-on-bundle-install-command.html"/>
     <updated>2014-11-29T19:51:13+02:00</updated>
-    <id>http://goodniceweb.me/ruby/rails/3-typical-mistakes-on-bundle-install-command</id>
+    <id>http://goodniceweb.me/11-29-2014/3-typical-mistakes-on-bundle-install-command</id>
     <content type="html"><![CDATA[<h2>1. Old rubygem</h2>
 
 <p>One day I tried to <code>bundle install</code> like always, but… I had it error</p>
