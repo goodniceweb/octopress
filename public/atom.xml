@@ -4,7 +4,7 @@
   <title><![CDATA[GoodNiceWeb]]></title>
   <link href="http://goodniceweb.me/atom.xml" rel="self"/>
   <link href="http://goodniceweb.me/"/>
-  <updated>2015-04-13T14:52:00+03:00</updated>
+  <updated>2015-05-04T13:32:05+03:00</updated>
   <id>http://goodniceweb.me/</id>
   <author>
     <name><![CDATA[Alexey Cherkashin]]></name>
@@ -12,6 +12,121 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Jenkins Rails Docker Container]]></title>
+    <link href="http://goodniceweb.me/05-04-2015/jenkins-rails-docker-container.html"/>
+    <updated>2015-05-04T12:25:29+03:00</updated>
+    <id>http://goodniceweb.me/05-04-2015/jenkins-rails-docker-container</id>
+    <content type="html"><![CDATA[<p>Today I want to present my first contribution to Docker community -
+<a href="https://registry.hub.docker.com/u/goodniceweb/jenkins-rails/">Jenkins Rails image</a>.</p>
+
+<p>For better understanding what work was done I propose to look into
+<a href="https://github.com/goodniceweb/docker-jenkins-rails/blob/master/Dockerfile">Dockerfile</a>.
+At first lines you can see system upgrades, installing Rails requirements
+and npm. Secondly, we ignore auto generated docs and install useful plugins.</p>
+
+<p>That&rsquo;s it! Is it so little? Maybe, but it&rsquo;s enough for start. Almost.</p>
+
+<p>Are you want to know how to use and extend it for your needs?
+What are you waiting for - press a &ldquo;Read more&rdquo; button.</p>
+
+<!--more-->
+
+
+<h2>How to use</h2>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>docker run -p 8080:8080 <span class="se">\</span>
+</span><span class='line'>           -v /your/host/volume:/home/jenkins_home <span class="se">\</span>
+</span><span class='line'>           goodniceweb/jenkins-rails:latest
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Visit <code>your.domain.example:8080</code> and voila: here is Jenkins
+prepared for your Rails project!</p>
+
+<h2>How to extend</h2>
+
+<p>In few cases you find something missing in this based image.
+Fortunately, it&rsquo;s easy to extend.</p>
+
+<p>Firstly, create your own Dockerfile.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>FROM goodniceweb/jenkins-rails:latest
+</span><span class='line'>MAINTAINER Your Name &lt;your@email&gt;
+</span><span class='line'>
+</span><span class='line'><span class="c"># capybara requirements</span>
+</span><span class='line'><span class="c"># RUN npm install -g phantomjs</span>
+</span><span class='line'>
+</span><span class='line'><span class="c"># dependencies of running javascript test on instances without X </span>
+</span><span class='line'><span class="c"># RUN apt-get install -y vnc4server </span>
+</span><span class='line'>
+</span><span class='line'><span class="c"># help to avoid error MoveTargetOutOfBoundsError</span>
+</span><span class='line'><span class="c"># RUN apt-get install -y fluxbox</span>
+</span><span class='line'>
+</span><span class='line'><span class="c"># rmagick dependencies</span>
+</span><span class='line'><span class="c"># RUN apt-get install -y imagemagick</span>
+</span><span class='line'>
+</span><span class='line'><span class="c"># dependencies of capybara webkit gem</span>
+</span><span class='line'><span class="c"># RUN apt-get install -y libqt4-dev libqtwebkit-dev</span>
+</span><span class='line'>
+</span><span class='line'><span class="c"># Good practice - drop back to regular user</span>
+</span><span class='line'>USER jenkins
+</span><span class='line'>
+</span><span class='line'>ENTRYPOINT <span class="o">[</span><span class="s2">&quot;/usr/local/bin/jenkins.sh&quot;</span><span class="o">]</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>I think above comments are very self explain.</p>
+
+<p>Secondly, run <code>docker build</code> command. For ex.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>docker build -t my-nick/my-jenkins-build:latest .
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Finally, just run it.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>docker run -p 8080:8080 <span class="se">\</span>
+</span><span class='line'>           -v /your/host/volume:/home/jenkins_home <span class="se">\</span>
+</span><span class='line'>           my-nick/my-jenkins-build:latest
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>That&rsquo;s it! So easy, isn&rsquo;t?</p>
+
+<p>I hope you find it useful. Have a nice web!</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[5 Tips for Faster Intro to New Rails Project]]></title>

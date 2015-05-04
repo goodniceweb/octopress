@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Ci | GoodNiceWeb]]></title>
+  <link href="http://goodniceweb.me/blog/categories/ci/atom.xml" rel="self"/>
+  <link href="http://goodniceweb.me/"/>
+  <updated>2015-05-04T13:32:05+03:00</updated>
+  <id>http://goodniceweb.me/</id>
+  <author>
+    <name><![CDATA[Alexey Cherkashin]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Jenkins Rails Docker Container]]></title>
+    <link href="http://goodniceweb.me/05-04-2015/jenkins-rails-docker-container.html"/>
+    <updated>2015-05-04T12:25:29+03:00</updated>
+    <id>http://goodniceweb.me/05-04-2015/jenkins-rails-docker-container</id>
+    <content type="html"><![CDATA[<p>Today I want to present my first contribution to Docker community -
+<a href="https://registry.hub.docker.com/u/goodniceweb/jenkins-rails/">Jenkins Rails image</a>.</p>
+
+<p>For better understanding what work was done I propose to look into
+<a href="https://github.com/goodniceweb/docker-jenkins-rails/blob/master/Dockerfile">Dockerfile</a>.
+At first lines you can see system upgrades, installing Rails requirements
+and npm. Secondly, we ignore auto generated docs and install useful plugins.</p>
+
+<p>That&rsquo;s it! Is it so little? Maybe, but it&rsquo;s enough for start. Almost.</p>
+
+<p>Are you want to know how to use and extend it for your needs?
+What are you waiting for - press a &ldquo;Read more&rdquo; button.</p>
+
+<!--more-->
+
+
+<h2>How to use</h2>
+
+<pre><code class="bash">docker run -p 8080:8080 \
+           -v /your/host/volume:/home/jenkins_home \
+           goodniceweb/jenkins-rails:latest
+</code></pre>
+
+<p>Visit <code>your.domain.example:8080</code> and voila: here is Jenkins
+prepared for your Rails project!</p>
+
+<h2>How to extend</h2>
+
+<p>In few cases you find something missing in this based image.
+Fortunately, it&rsquo;s easy to extend.</p>
+
+<p>Firstly, create your own Dockerfile.</p>
+
+<pre><code class="bash">FROM goodniceweb/jenkins-rails:latest
+MAINTAINER Your Name &lt;your@email&gt;
+
+# capybara requirements
+# RUN npm install -g phantomjs
+
+# dependencies of running javascript test on instances without X 
+# RUN apt-get install -y vnc4server 
+
+# help to avoid error MoveTargetOutOfBoundsError
+# RUN apt-get install -y fluxbox
+
+# rmagick dependencies
+# RUN apt-get install -y imagemagick
+
+# dependencies of capybara webkit gem
+# RUN apt-get install -y libqt4-dev libqtwebkit-dev
+
+# Good practice - drop back to regular user
+USER jenkins
+
+ENTRYPOINT ["/usr/local/bin/jenkins.sh"]
+</code></pre>
+
+<p>I think above comments are very self explain.</p>
+
+<p>Secondly, run <code>docker build</code> command. For ex.</p>
+
+<pre><code class="bash">docker build -t my-nick/my-jenkins-build:latest .
+</code></pre>
+
+<p>Finally, just run it.</p>
+
+<pre><code class="bash">docker run -p 8080:8080 \
+           -v /your/host/volume:/home/jenkins_home \
+           my-nick/my-jenkins-build:latest
+</code></pre>
+
+<p>That&rsquo;s it! So easy, isn&rsquo;t?</p>
+
+<p>I hope you find it useful. Have a nice web!</p>
+]]></content>
+  </entry>
+  
+</feed>

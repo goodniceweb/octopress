@@ -1,0 +1,335 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Jenkins Rails Docker Container - GoodNiceWeb</title>
+  <meta name="author" content="Alexey Cherkashin">
+
+  
+  <meta name="description" content="Today I want to present my first contribution to Docker community -
+Jenkins Rails image. For better understanding what work was done I propose to &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://goodniceweb.me/05-04-2015/jenkins-rails-docker-container.html">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/stylesheets/data-table.css" media="screen, projection" rel="stylesheet" type="text/css" />
+  <link href="/atom.xml" rel="alternate" title="GoodNiceWeb" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="//fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="//fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-61835674-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">GoodNiceWeb</a></h1>
+  
+    <h2>Let&#8217;s make web better together!</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="https://www.google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:goodniceweb.me" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+  <li><a href="/about">About</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">Jenkins Rails Docker Container</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2015-05-04T12:25:29+03:00'><span class='date'><span class='date-month'>May</span> <span class='date-day'>4</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>12:25 pm</span></time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>Today I want to present my first contribution to Docker community -
+<a href="https://registry.hub.docker.com/u/goodniceweb/jenkins-rails/">Jenkins Rails image</a>.</p>
+
+<p>For better understanding what work was done I propose to look into
+<a href="https://github.com/goodniceweb/docker-jenkins-rails/blob/master/Dockerfile">Dockerfile</a>.
+At first lines you can see system upgrades, installing Rails requirements
+and npm. Secondly, we ignore auto generated docs and install useful plugins.</p>
+
+<p>That&rsquo;s it! Is it so little? Maybe, but it&rsquo;s enough for start. Almost.</p>
+
+<p>Are you want to know how to use and extend it for your needs?
+What are you waiting for - press a &ldquo;Read more&rdquo; button.</p>
+
+<!--more-->
+
+
+<h2>How to use</h2>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>docker run -p 8080:8080 <span class="se">\</span>
+</span><span class='line'>           -v /your/host/volume:/home/jenkins_home <span class="se">\</span>
+</span><span class='line'>           goodniceweb/jenkins-rails:latest
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Visit <code>your.domain.example:8080</code> and voila: here is Jenkins
+prepared for your Rails project!</p>
+
+<h2>How to extend</h2>
+
+<p>In few cases you find something missing in this based image.
+Fortunately, it&rsquo;s easy to extend.</p>
+
+<p>Firstly, create your own Dockerfile.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>FROM goodniceweb/jenkins-rails:latest
+</span><span class='line'>MAINTAINER Your Name &lt;your@email&gt;
+</span><span class='line'>
+</span><span class='line'><span class="c"># capybara requirements</span>
+</span><span class='line'><span class="c"># RUN npm install -g phantomjs</span>
+</span><span class='line'>
+</span><span class='line'><span class="c"># dependencies of running javascript test on instances without X </span>
+</span><span class='line'><span class="c"># RUN apt-get install -y vnc4server </span>
+</span><span class='line'>
+</span><span class='line'><span class="c"># help to avoid error MoveTargetOutOfBoundsError</span>
+</span><span class='line'><span class="c"># RUN apt-get install -y fluxbox</span>
+</span><span class='line'>
+</span><span class='line'><span class="c"># rmagick dependencies</span>
+</span><span class='line'><span class="c"># RUN apt-get install -y imagemagick</span>
+</span><span class='line'>
+</span><span class='line'><span class="c"># dependencies of capybara webkit gem</span>
+</span><span class='line'><span class="c"># RUN apt-get install -y libqt4-dev libqtwebkit-dev</span>
+</span><span class='line'>
+</span><span class='line'><span class="c"># Good practice - drop back to regular user</span>
+</span><span class='line'>USER jenkins
+</span><span class='line'>
+</span><span class='line'>ENTRYPOINT <span class="o">[</span><span class="s2">&quot;/usr/local/bin/jenkins.sh&quot;</span><span class="o">]</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>I think above comments are very self explain.</p>
+
+<p>Secondly, run <code>docker build</code> command. For ex.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>docker build -t my-nick/my-jenkins-build:latest .
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Finally, just run it.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>docker run -p 8080:8080 <span class="se">\</span>
+</span><span class='line'>           -v /your/host/volume:/home/jenkins_home <span class="se">\</span>
+</span><span class='line'>           my-nick/my-jenkins-build:latest
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>That&rsquo;s it! So easy, isn&rsquo;t?</p>
+
+<p>I hope you find it useful. Have a nice web!</p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Alexey Cherkashin</span></span>
+
+      
+
+
+
+
+<time class='entry-date' datetime='2015-05-04T12:25:29+03:00'><span class='date'><span class='date-month'>May</span> <span class='date-day'>4</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>12:25 pm</span></time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/ci/'>ci</a>, <a class='category' href='/blog/categories/docker/'>docker</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://goodniceweb.me/05-04-2015/jenkins-rails-docker-container.html" data-via="goodniceweb" data-counturl="http://goodniceweb.me/05-04-2015/jenkins-rails-docker-container.html" >Tweet</a>
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/04-12-2015/5-tips-for-faster-intro-to-new-rails-project.html" title="Previous Post: 5 Tips for Faster Intro to New Rails Project">&laquo; 5 Tips for Faster Intro to New Rails Project</a>
+      
+      
+    </p>
+  </footer>
+</article>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1><a href="/about">About Me</a></h1>
+  <p>Highly motivated RubyOnRails developer. Check more on <a href="/about">about page</a></p>
+</section>
+<section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/05-04-2015/jenkins-rails-docker-container.html">Jenkins Rails Docker Container</a>
+      </li>
+    
+      <li class="post">
+        <a href="/04-12-2015/5-tips-for-faster-intro-to-new-rails-project.html">5 Tips for Faster Intro to New Rails Project</a>
+      </li>
+    
+      <li class="post">
+        <a href="/03-08-2015/deploying-of-one-app.html">Deploying of One App</a>
+      </li>
+    
+      <li class="post">
+        <a href="/03-07-2015/merge-model-instances.html">Merge Model Instances</a>
+      </li>
+    
+      <li class="post">
+        <a href="/11-29-2014/3-typical-mistakes-on-bundle-install-command.html">3 Typical Mistakes on Bundle Install Command</a>
+      </li>
+    
+  </ul>
+</section>
+
+<section>
+  <h1>GitHub</h1>
+  
+  <a href="https://github.com/goodniceweb">@goodniceweb</a> on GitHub
+  
+  </section>
+
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2015 - Alexey Cherkashin -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = '//platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

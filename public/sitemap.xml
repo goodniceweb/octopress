@@ -1,6 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>http://goodniceweb.me/05-04-2015/jenkins-rails-docker-container.html</loc>
+    <lastmod>2015-05-04T12:25:29+03:00</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>http://goodniceweb.me/04-12-2015/5-tips-for-faster-intro-to-new-rails-project.html</loc>
     <lastmod>2015-04-12T15:15:36+03:00</lastmod>
     <priority>0.8</priority>
@@ -22,19 +27,19 @@
   </url>
   <url>
     <loc>http://goodniceweb.me/</loc>
-    <lastmod>2015-04-13T14:52:00+03:00</lastmod>
+    <lastmod>2015-05-04T13:32:05+03:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
     <loc>http://goodniceweb.me/blog/archives/</loc>
-    <lastmod>2015-04-13T14:52:00+03:00</lastmod>
+    <lastmod>2015-05-04T13:32:05+03:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>http://goodniceweb.me/about/</loc>
-    <lastmod>2015-04-13T14:52:00+03:00</lastmod>
+    <lastmod>2015-05-04T13:32:05+03:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
