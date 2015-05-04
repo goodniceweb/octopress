@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Jenkins Rails Docker container"
+title: "Jenkins Docker container for Rails"
 date: 2015-05-04 12:25:29 +0300
 comments: true
 categories: docker ci

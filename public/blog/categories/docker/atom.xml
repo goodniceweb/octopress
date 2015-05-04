@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Docker | GoodNiceWeb]]></title>
   <link href="http://goodniceweb.me/blog/categories/docker/atom.xml" rel="self"/>
   <link href="http://goodniceweb.me/"/>
-  <updated>2015-05-04T13:32:05+03:00</updated>
+  <updated>2015-05-04T14:31:21+03:00</updated>
   <id>http://goodniceweb.me/</id>
   <author>
     <name><![CDATA[Alexey Cherkashin]]></name>
@@ -14,7 +14,7 @@
 
   
   <entry>
-    <title type="html"><![CDATA[Jenkins Rails Docker Container]]></title>
+    <title type="html"><![CDATA[Jenkins Docker Container for Rails]]></title>
     <link href="http://goodniceweb.me/05-04-2015/jenkins-rails-docker-container.html"/>
     <updated>2015-05-04T12:25:29+03:00</updated>
     <id>http://goodniceweb.me/05-04-2015/jenkins-rails-docker-container</id>
