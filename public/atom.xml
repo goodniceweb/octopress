@@ -4,7 +4,7 @@
   <title><![CDATA[GoodNiceWeb]]></title>
   <link href="http://goodniceweb.me/atom.xml" rel="self"/>
   <link href="http://goodniceweb.me/"/>
-  <updated>2015-05-04T14:31:21+03:00</updated>
+  <updated>2015-05-11T17:34:19+03:00</updated>
   <id>http://goodniceweb.me/</id>
   <author>
     <name><![CDATA[Alexey Cherkashin]]></name>
@@ -12,6 +12,139 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Jenkins With Rails Step-by-step]]></title>
+    <link href="http://goodniceweb.me/05-11-2015/jenkins-with-rails-step-by-step.html"/>
+    <updated>2015-05-11T13:38:52+03:00</updated>
+    <id>http://goodniceweb.me/05-11-2015/jenkins-with-rails-step-by-step</id>
+    <content type="html"><![CDATA[<p>In <a href="http://goodniceweb.me/05-04-2015/jenkins-rails-docker-container.html">my previous post</a>
+you can find manual of jenkins-rails container usage. Here I want to extend it,
+add some screenshots and so on.</p>
+
+<p>At first, let&rsquo;s create new rails app.</p>
+
+<!-- more -->
+
+
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>rails --version
+</span><span class='line'>Rails 4.2.0.rc2
+</span><span class='line'><span class="nv">$ </span>rails new candy --skip-test-unit <span class="o">&amp;&amp;</span> <span class="nb">cd </span>candy
+</span><span class='line'><span class="nv">$ </span>git init <span class="o">&amp;&amp;</span> git add . <span class="o">&amp;&amp;</span> git ci -m <span class="s2">&quot;Initial commit&quot;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Now I&rsquo;ll install <code>rspec</code> and make get some dead simple tests from scaffold.</p>
+
+<p><a href="http://pastie.org/private/nuhg3wvcphhc0euzkd4tw">Gemfile</a></p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>rails g rspec:install
+</span><span class='line'><span class="nv">$ </span>rails g scaffold article title content:text
+</span><span class='line'><span class="nv">$ </span>rake db:migrate
+</span><span class='line'><span class="nv">$ </span><span class="nb">echo</span> <span class="s1">&#39;-f documentation&#39;</span> &gt;&gt; .rspec
+</span><span class='line'><span class="nv">$ </span>rspec spec
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Last will must return smth. like this</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>Finished in 0.2916 seconds
+</span><span class='line'><span class="m">30</span> examples, <span class="m">0</span> failures, <span class="m">2</span> pending
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Than let&rsquo;s execute line from previous post.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>docker run -d <span class="se">\</span>
+</span><span class='line'>    -p 8080:8080 <span class="se">\</span>
+</span><span class='line'>    -v ~/your/folder:/home/jenkins_home <span class="se">\</span>
+</span><span class='line'>    --name jenkins <span class="se">\</span>
+</span><span class='line'>    goodniceweb/jenkins-rails:latest
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Now on visiting <a href="http://localhost:8080/">http://localhost:8080/</a> you&rsquo;ll see Jenkins dashboard screen.</p>
+
+<h1>screenshot</h1>
+
+<p>At first here I propose to make Jenkins more secure. Click to &ldquo;Manage Jenkins&rdquo; link
+and than to &ldquo;Setup Security&rdquo; button. On opened page check &ldquo;Enable security&rdquo; box.</p>
+
+<h1>screenshot</h1>
+
+<p>In &ldquo;Access Control&rdquo; section &ldquo;Security Realm&rdquo; sub-section choose &ldquo;Jenkins’ own user database&rdquo; radiobutton.
+Below, in &ldquo;Authorization&rdquo; sub-section choose &ldquo;Project-based Matrix Authorization Strategy&rdquo; option.</p>
+
+<h1>screenshot</h1>
+
+<p>You&rsquo;ll able to see created table with only &lsquo;Anonymous&rsquo; user for now. We will fix it later.
+At first let&rsquo;s add &lsquo;Read&rsquo; permission to Anonymous user. Just tick according checkbox.</p>
+
+<h1>screenshot</h1>
+
+<p>Ok, now the time for creating admin user. Focus this input&hellip;</p>
+
+<h1>screenshot</h1>
+
+<p>&hellip; write &lsquo;admin&rsquo; and press &ldquo;Add&rdquo; button. Then scroll horisontally, if its need,
+and press on this little icon. All checkboxes should be chosen for admin, right?</p>
+
+<p>Perfect. Now I propose to save your changes. Press &ldquo;Save&rdquo; button underneath.
+You should be redirected to login page after this because now you are Anonymous user.
+Don&rsquo;t worry, directly after registration you&rsquo;ll able to continue configuring Jenkins.</p>
+
+<h1>screenshot</h1>
+
+<p>Super awesome. Now time to initialize our project. Press &ldquo;create new jobs&rdquo; on main page
+or &ldquo;New Item&rdquo; link. Than choose a name and select &ldquo;Freestyle project&rdquo; option. Press &ldquo;OK&rdquo;.</p>
+
+<h1>screenshot</h1>
+
+<p>Then you&rsquo;ll see Job Settings page. Few things here need to be configured:</p>
+
+<ol>
+<li>Security settings. Add your &lsquo;admin&rsquo; user with all permissions.</li>
+<li>Choose &ldquo;Git&rdquo; from &ldquo;Source Code Management&rdquo; section. Install your credentials.
+I prefer to use https with login/password for this test.</li>
+<li>Install push hooks and rvm settings.</li>
+<li><p>Insert build script for testing project</p>
+
+<p>I prefer to use smth. like this:</p>
+
+<pre><code class="bash">bundle install --without production --deployment
+cp -f config/database.yml.example config/database.yml
+cp -f config/secrets.yml.example config/secrets.yml
+bundle exec rake db:migrate RAILS_ENV=test 
+bundle exec rspec spec 
+</code></pre>
+
+<p>Here we make sure that we had latest gem and database settings.
+Also we place secrets.yml file, update db state and run the tests.</p></li>
+<li><p>Let&rsquo;s create email notification for failing cases.</p></li>
+</ol>
+
+
+<p>That&rsquo;s it. Pressing &ldquo;Save&rdquo; button will redirect us to main Job page.</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Jenkins Docker Container for Rails]]></title>
