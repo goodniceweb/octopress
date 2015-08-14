@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Ruby | GoodNiceWeb]]></title>
   <link href="http://goodniceweb.me/blog/categories/ruby/atom.xml" rel="self"/>
   <link href="http://goodniceweb.me/"/>
-  <updated>2015-05-04T14:31:21+03:00</updated>
+  <updated>2015-08-14T15:29:34+03:00</updated>
   <id>http://goodniceweb.me/</id>
   <author>
     <name><![CDATA[Alexey Cherkashin]]></name>
@@ -14,9 +14,103 @@
 
   
   <entry>
+    <title type="html"><![CDATA[5 Ways to Add Prefix at Beginning of a String]]></title>
+    <link href="http://goodniceweb.me/08-14-2015/5-ways-to-add-prefix-at-beginning-of-a-string.html"/>
+    <updated>2015-08-14T15:00:30+03:00</updated>
+    <id>http://goodniceweb.me/08-14-2015/5-ways-to-add-prefix-at-beginning-of-a-string</id>
+    <content type="html"><![CDATA[<p>Mostly all of us like their our names. That&rsquo;s why effective email often starts from username.
+I had a task where I need to fetch any information about receiver and add it to very beginning of email.</p>
+
+<p>So, challenge accepted and I writing fetch method, then refactor it to class and ta-da:
+we have a chance to guess username. Our emails&rsquo;ll become much pretty. But wait!
+Need to add it name to email at first. And I started think about: which way most common for it case,
+how great rubist can implement that? Below I present five variants which I found.</p>
+
+<!--more-->
+
+
+<h2>1. Array#join</h2>
+
+<p><a href="http://ruby-doc.org/core-2.2.2/Array.html#method-i-join">Array#join</a></p>
+
+<p>What? Array? Did you joke? Sure, not) Lets see:</p>
+
+<pre><code class="ruby">str = "world"
+prefix = "Hello, "
+result = [prefix, str].join # =&gt; "Hello, world"
+</code></pre>
+
+<p>But what about GC in this case? Here we use 3 strings and 1 array.
+Not really careful about a RAM. Lets see another variants.</p>
+
+<h2>2. Insert</h2>
+
+<p><a href="http://ruby-doc.org/core-2.2.2/String.html#method-i-insert">String#insert</a></p>
+
+<pre><code class="ruby">str = "world"
+str.insert(0, "Hello, ") # =&gt; Hello, world
+</code></pre>
+
+<p>It created only 2 strings, cool! How you can see it also return changed line immediately.
+Why I mention that? Please, see #3 and #4</p>
+
+<h2>3. [with Regexp]</h2>
+
+<p><a href="http://ruby-doc.org/core-2.2.2/String.html#method-i-5B-5D-3D">String#:[]</a></p>
+
+<pre><code class="ruby">str = "world"
+str[/\A/] = "Hello, " # =&gt; "Hello, "
+str                   # =&gt; "Hello, world"
+</code></pre>
+
+<p>Isn&rsquo;t that awesome? Ruby <code>String#:[]</code> method can get <code>Regexp</code> like an argument!
+Did you know about it before? I nope) So I glad to gain new experience.</p>
+
+<h2>4. [with funny smile]</h2>
+
+<pre><code class="ruby">str = "world"
+str[0,0] = "Hello, " # =&gt; "Hello, "
+str                  # =&gt; "Hello, world"
+</code></pre>
+
+<p>As you can see from documentation, the squarebrackets method can get a second argument.
+And when it is, first arg become an index, which you can specify for replacing
+next <code>%second_arg%</code> values.</p>
+
+<h2>5. Prepend</h2>
+
+<p><a href="http://ruby-doc.org/core-2.2.2/String.html#method-i-prepend">String#prepend</a></p>
+
+<p>And the last one, but not in relevance.</p>
+
+<pre><code class="ruby">str = "world"
+str.prepend("Hello, ") # =&gt; "Hello, world"
+</code></pre>
+
+<h1>Conclusion</h1>
+
+<p>So, which one you&rsquo;ll use? It&rsquo;s completely your choice. I think that most ruby way to use <code>prepend</code>.
+But lets see benchmarks at first.</p>
+
+<p><a href="https://gist.github.com/goodniceweb/85665d4fcfc3f1c0a423">Benchmark Gist</a></p>
+
+<pre><code class="bash">Comparison:
+       String#insert:  2557799.1 i/s
+      String#prepend:  2521598.6 i/s - 1.01x slower
+        String#[0,0]:  2422770.0 i/s - 1.06x slower
+          Array#join:  1650504.4 i/s - 1.55x slower
+       String#[/\A/]:  1065932.3 i/s - 2.40x slower
+</code></pre>
+
+<p>Wow, looks great! Ruby way not only good for eyes but faster as well for it case. Glad to know it.
+Are you not?</p>
+]]></content>
+  </entry>
+  
+  <entry>
     <title type="html"><![CDATA[Deploying of One App]]></title>
     <link href="http://goodniceweb.me/03-08-2015/deploying-of-one-app.html"/>
-    <updated>2015-03-08T00:57:32+02:00</updated>
+    <updated>2015-03-08T01:57:32+03:00</updated>
     <id>http://goodniceweb.me/03-08-2015/deploying-of-one-app</id>
     <content type="html"><![CDATA[<p>I have Rails 4.1.8 app. One day I want to deploy it in production. Used <code>capistrano (3.3.5)</code> for it.</p>
 
@@ -80,7 +174,7 @@ When I shut down webrick by <code>^C</code>. puma continue to initialize and eve
   <entry>
     <title type="html"><![CDATA[Merge Model Instances]]></title>
     <link href="http://goodniceweb.me/03-07-2015/merge-model-instances.html"/>
-    <updated>2015-03-07T22:18:42+02:00</updated>
+    <updated>2015-03-07T23:18:42+03:00</updated>
     <id>http://goodniceweb.me/03-07-2015/merge-model-instances</id>
     <content type="html"><![CDATA[<p>Sometimes we can understand that our model field required validation too late. Better late than nerer: you add validation to model and get better new records. But what we can do with old invalid data?</p>
 
@@ -128,7 +222,7 @@ So, for now you will find new versions here: <a href="https://github.com/goodnic
   <entry>
     <title type="html"><![CDATA[3 Typical Mistakes on Bundle Install Command]]></title>
     <link href="http://goodniceweb.me/11-29-2014/3-typical-mistakes-on-bundle-install-command.html"/>
-    <updated>2014-11-29T19:51:13+02:00</updated>
+    <updated>2014-11-29T20:51:13+03:00</updated>
     <id>http://goodniceweb.me/11-29-2014/3-typical-mistakes-on-bundle-install-command</id>
     <content type="html"><![CDATA[<h2>1. Old rubygem</h2>
 
