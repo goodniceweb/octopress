@@ -4,7 +4,7 @@
   <title><![CDATA[GoodNiceWeb]]></title>
   <link href="http://goodniceweb.me/atom.xml" rel="self"/>
   <link href="http://goodniceweb.me/"/>
-  <updated>2015-05-11T17:34:19+03:00</updated>
+  <updated>2015-08-14T17:37:28+03:00</updated>
   <id>http://goodniceweb.me/</id>
   <author>
     <name><![CDATA[Alexey Cherkashin]]></name>
@@ -14,11 +14,11 @@
 
   
   <entry>
-    <title type="html"><![CDATA[Jenkins With Rails Step-by-step]]></title>
+    <title type="html"><![CDATA[Jenkins With Rails Step-by-step. Part 1]]></title>
     <link href="http://goodniceweb.me/05-11-2015/jenkins-with-rails-step-by-step.html"/>
     <updated>2015-05-11T13:38:52+03:00</updated>
     <id>http://goodniceweb.me/05-11-2015/jenkins-with-rails-step-by-step</id>
-    <content type="html"><![CDATA[<p>In <a href="http://goodniceweb.me/05-04-2015/jenkins-rails-docker-container.html">my previous post</a>
+    <content type="html"><![CDATA[<p>In <a href="http://goodniceweb.me/05-04-2015/jenkins-rails-docker-container.html">one of my recent posts</a>
 you can find manual of jenkins-rails container usage. Here I want to extend it,
 add some screenshots and so on.</p>
 
@@ -34,7 +34,7 @@ add some screenshots and so on.</p>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
 </pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>rails --version
-</span><span class='line'>Rails 4.2.0.rc2
+</span><span class='line'>Rails 4.2.0.rc2 <span class="c"># feel free to use your version here ;)</span>
 </span><span class='line'><span class="nv">$ </span>rails new candy --skip-test-unit <span class="o">&amp;&amp;</span> <span class="nb">cd </span>candy
 </span><span class='line'><span class="nv">$ </span>git init <span class="o">&amp;&amp;</span> git add . <span class="o">&amp;&amp;</span> git ci -m <span class="s2">&quot;Initial commit&quot;</span>
 </span></code></pre></td></tr></table></div></figure>
@@ -49,7 +49,9 @@ add some screenshots and so on.</p>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
 <span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>rails g rspec:install
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>bundle install
+</span><span class='line'><span class="nv">$ </span>rails g rspec:install
 </span><span class='line'><span class="nv">$ </span>rails g scaffold article title content:text
 </span><span class='line'><span class="nv">$ </span>rake db:migrate
 </span><span class='line'><span class="nv">$ </span><span class="nb">echo</span> <span class="s1">&#39;-f documentation&#39;</span> &gt;&gt; .rspec
@@ -83,48 +85,60 @@ add some screenshots and so on.</p>
 
 <p>Now on visiting <a href="http://localhost:8080/">http://localhost:8080/</a> you&rsquo;ll see Jenkins dashboard screen.</p>
 
-<h1>screenshot</h1>
+<p><img src="http://goodniceweb.me/images/jenkins-rails-comprehensive-guide/jenkins-dashboard-1.png" title="&#34;Jenkins Dashboard&#34;" alt="&#34;Jenkins Dashboard&#34;"></p>
 
 <p>At first here I propose to make Jenkins more secure. Click to &ldquo;Manage Jenkins&rdquo; link
 and than to &ldquo;Setup Security&rdquo; button. On opened page check &ldquo;Enable security&rdquo; box.</p>
 
-<h1>screenshot</h1>
+<p><img src="http://goodniceweb.me/images/jenkins-rails-comprehensive-guide/security-1.png" title="&#34;Jenkins Security Settings&#34;" alt="&#34;Jenkins Security Settings&#34;"></p>
 
 <p>In &ldquo;Access Control&rdquo; section &ldquo;Security Realm&rdquo; sub-section choose &ldquo;Jenkins’ own user database&rdquo; radiobutton.
 Below, in &ldquo;Authorization&rdquo; sub-section choose &ldquo;Project-based Matrix Authorization Strategy&rdquo; option.</p>
 
-<h1>screenshot</h1>
+<p><img src="http://goodniceweb.me/images/jenkins-rails-comprehensive-guide/security-2.png" title="&#34;Jenkins Security Settings&#34;" alt="&#34;Jenkins Security Settings&#34;"></p>
 
 <p>You&rsquo;ll able to see created table with only &lsquo;Anonymous&rsquo; user for now. We will fix it later.
 At first let&rsquo;s add &lsquo;Read&rsquo; permission to Anonymous user. Just tick according checkbox.</p>
 
-<h1>screenshot</h1>
+<p><img src="http://goodniceweb.me/images/jenkins-rails-comprehensive-guide/security-3.png" title="&#34;Jenkins Security Settings&#34;" alt="&#34;Jenkins Security Settings&#34;"></p>
 
 <p>Ok, now the time for creating admin user. Focus this input&hellip;</p>
 
-<h1>screenshot</h1>
+<p><img src="http://goodniceweb.me/images/jenkins-rails-comprehensive-guide/security-4.png" title="&#34;Jenkins Security Settings&#34;" alt="&#34;Jenkins Security Settings&#34;"></p>
 
 <p>&hellip; write &lsquo;admin&rsquo; and press &ldquo;Add&rdquo; button. Then scroll horisontally, if its need,
 and press on this little icon. All checkboxes should be chosen for admin, right?</p>
 
+<p><img src="http://goodniceweb.me/images/jenkins-rails-comprehensive-guide/security-5.png" title="&#34;Jenkins Security Settings&#34;" alt="&#34;Jenkins Security Settings&#34;"></p>
+
 <p>Perfect. Now I propose to save your changes. Press &ldquo;Save&rdquo; button underneath.
 You should be redirected to login page after this because now you are Anonymous user.
-Don&rsquo;t worry, directly after registration you&rsquo;ll able to continue configuring Jenkins.</p>
+Don&rsquo;t worry, directly after registration you&rsquo;ll be able to continue configuring Jenkins.</p>
 
-<h1>screenshot</h1>
+<p><img src="http://goodniceweb.me/images/jenkins-rails-comprehensive-guide/registration.png" title="&#34;Jenkins Registration&#34;" alt="&#34;Jenkins Registration&#34;"></p>
+
+<p><img src="http://goodniceweb.me/images/jenkins-rails-comprehensive-guide/jenkins-dashboard-2.png" title="&#34;Jenkins Security Settings&#34;" alt="&#34;Jenkins Security Settings&#34;"></p>
 
 <p>Super awesome. Now time to initialize our project. Press &ldquo;create new jobs&rdquo; on main page
 or &ldquo;New Item&rdquo; link. Than choose a name and select &ldquo;Freestyle project&rdquo; option. Press &ldquo;OK&rdquo;.</p>
 
-<h1>screenshot</h1>
+<p><img src="http://goodniceweb.me/images/jenkins-rails-comprehensive-guide/new-project.png" title="&#34;Jenkins New Rails Project&#34;" alt="&#34;Jenkins New Rails Project&#34;"></p>
 
 <p>Then you&rsquo;ll see Job Settings page. Few things here need to be configured:</p>
 
 <ol>
-<li>Security settings. Add your &lsquo;admin&rsquo; user with all permissions.</li>
-<li>Choose &ldquo;Git&rdquo; from &ldquo;Source Code Management&rdquo; section. Install your credentials.
-I prefer to use https with login/password for this test.</li>
-<li>Install push hooks and rvm settings.</li>
+<li><p>Security settings. Check &ldquo;Enable project-based security&rdquo; box. Add your &lsquo;admin&rsquo; user with all permissions.</p>
+
+<p><img src="http://goodniceweb.me/images/jenkins-rails-comprehensive-guide/security-6.png" title="&#34;Jenkins Project Security&#34;" alt="&#34;Jenkins Project Security&#34;"></p></li>
+<li><p>Choose &ldquo;Git&rdquo; from &ldquo;Source Code Management&rdquo; section. Install your credentials.
+I prefer to use https with login/password for this test.</p>
+
+<p><img src="http://goodniceweb.me/images/jenkins-rails-comprehensive-guide/project-settings-1.png" title="&#34;Jenkins Project Settings&#34;" alt="&#34;Jenkins Project Settings&#34;">
+<img src="http://goodniceweb.me/images/jenkins-rails-comprehensive-guide/project-settings-2.png" title="&#34;Jenkins Project Settings&#34;" alt="&#34;Jenkins Project Settings&#34;">
+<img src="http://goodniceweb.me/images/jenkins-rails-comprehensive-guide/project-settings-3.png" title="&#34;Jenkins Project Settings&#34;" alt="&#34;Jenkins Project Settings&#34;"></p></li>
+<li><p>Install push hooks and rvm settings.</p>
+
+<p><img src="http://goodniceweb.me/images/jenkins-rails-comprehensive-guide/project-settings-4.png" title="&#34;Jenkins Project Settings&#34;" alt="&#34;Jenkins Project Settings&#34;"></p></li>
 <li><p>Insert build script for testing project</p>
 
 <p>I prefer to use smth. like this:</p>
@@ -137,12 +151,22 @@ bundle exec rspec spec
 </code></pre>
 
 <p>Here we make sure that we had latest gem and database settings.
-Also we place secrets.yml file, update db state and run the tests.</p></li>
-<li><p>Let&rsquo;s create email notification for failing cases.</p></li>
+Also we place secrets.yml file, update db state and run the tests.</p>
+
+<p><img src="http://goodniceweb.me/images/jenkins-rails-comprehensive-guide/project-settings-5.png" title="&#34;Jenkins Project Settings&#34;" alt="&#34;Jenkins Project Settings&#34;"></p></li>
+<li><p>Let&rsquo;s create email notification for failing cases.</p>
+
+<p><img src="http://goodniceweb.me/images/jenkins-rails-comprehensive-guide/project-settings-6.png" title="&#34;Jenkins Project Settings&#34;" alt="&#34;Jenkins Project Settings&#34;"></p></li>
 </ol>
 
 
-<p>That&rsquo;s it. Pressing &ldquo;Save&rdquo; button will redirect us to main Job page.</p>
+<p>That&rsquo;s it. Pressing &ldquo;Save&rdquo; button will redirect us to main Job page. There we can trigger manual build
+for check is our configuration work or not.</p>
+
+<p>I hope you can follow this steps. If something went wrong and you have no idea how to handle it, please
+feel free to write below in comments. I&rsquo;ll help with pleasure :)</p>
+
+<p>Please, see <a href="#">second part</a> for next steps.</p>
 ]]></content>
   </entry>
   
@@ -372,7 +396,7 @@ graphic? There is nothing easier. Few gems for this already exist.</p>
   <entry>
     <title type="html"><![CDATA[Deploying of One App]]></title>
     <link href="http://goodniceweb.me/03-08-2015/deploying-of-one-app.html"/>
-    <updated>2015-03-08T00:57:32+02:00</updated>
+    <updated>2015-03-08T01:57:32+03:00</updated>
     <id>http://goodniceweb.me/03-08-2015/deploying-of-one-app</id>
     <content type="html"><![CDATA[<p>I have Rails 4.1.8 app. One day I want to deploy it in production. Used <code>capistrano (3.3.5)</code> for it.</p>
 
@@ -467,7 +491,7 @@ When I shut down webrick by <code>^C</code>. puma continue to initialize and eve
   <entry>
     <title type="html"><![CDATA[Merge Model Instances]]></title>
     <link href="http://goodniceweb.me/03-07-2015/merge-model-instances.html"/>
-    <updated>2015-03-07T22:18:42+02:00</updated>
+    <updated>2015-03-07T23:18:42+03:00</updated>
     <id>http://goodniceweb.me/03-07-2015/merge-model-instances</id>
     <content type="html"><![CDATA[<p>Sometimes we can understand that our model field required validation too late. Better late than nerer: you add validation to model and get better new records. But what we can do with old invalid data?</p>
 
@@ -515,7 +539,7 @@ So, for now you will find new versions here: <a href="https://github.com/goodnic
   <entry>
     <title type="html"><![CDATA[3 Typical Mistakes on Bundle Install Command]]></title>
     <link href="http://goodniceweb.me/11-29-2014/3-typical-mistakes-on-bundle-install-command.html"/>
-    <updated>2014-11-29T19:51:13+02:00</updated>
+    <updated>2014-11-29T20:51:13+03:00</updated>
     <id>http://goodniceweb.me/11-29-2014/3-typical-mistakes-on-bundle-install-command</id>
     <content type="html"><![CDATA[<h2>1. Old rubygem</h2>
 
