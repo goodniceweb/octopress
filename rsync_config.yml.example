@@ -1,0 +1,4 @@
+production:
+  user: "user@example.com"
+  port: "22"
+  document_root: "~/project/folder/"
