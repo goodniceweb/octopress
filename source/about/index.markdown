@@ -43,26 +43,37 @@ front-end scripts and have a lot of SEO experience and PHP basics.
 
 ### January 2014 - July 2014
 
-|                  |                                                                              |
-|------------------|------------------------------------------------------------------------------|
-|**Company name: **| Detective agency "Orlan"                                                     |
-|**Role:         **| Junior RubyOnRails developer                                                 |
-|**Address:      **| Ukraine, Kharkov, Shevchenko str. 32, room 207A                              |
-|**Duties:       **| Migration from Joomla to Rails, maintenance                                  |
+|                  |                                                    |
+|------------------|----------------------------------------------------|
+|**Company name: **| Detective agency "Orlan"                           |
+|**Role:         **| Junior RubyOnRails developer                       |
+|**Address:      **| Ukraine, Kharkov, Shevchenko str. 32, room 207A    |
+|**Duties:       **| Migration from Joomla to Rails, maintenance        |
 
 **Achievements: ** Getting start with Rails. Rewrite CMS logic to another engine with data save.
 
-### August 2014 - current
+### August 2014 - May 2015
 
-|                  |                                                                              |
-|------------------|------------------------------------------------------------------------------|
-|**Company name: **| Sloboda studio                                                               |
-|**Role:         **| Middle Rails developer                                                       |
-|**Address:      **| Ukraine, Kharkov, Moskovs'kyi Avenue, 257                                    |
-|**Duties:       **| Rails projects                                                               |
+|                  |                                             |
+|------------------|---------------------------------------------|
+|**Company name: **| Sloboda studio                              |
+|**Role:         **| Middle Rails developer                      |
+|**Address:      **| Ukraine, Kharkov, Moskovs'kyi Avenue, 257   |
+|**Duties:       **| Rails projects                              |
 
 **Achievements:** Working with Big Data. Using a lot of accompanying technologies:
-Agile, Scrum, Docker, Continuous Integration, DevOps
+Agile, Scrum, Docker, Continuous Integration, DevOps.
+
+### June 2015 - current
+
+|                  |                                    |
+|------------------|------------------------------------|
+|**Company name: **| ITechArt                           |
+|**Role:         **| Software Engineer                  |
+|**Address:      **| Belarus, Minsk, Tolstogo str. 10   |
+|**Duties:       **| Rails projects                     |
+
+**Achievements:** Close working on Front-end + Back-end projects, in particular: Backbone and React.
 
 ## Education
 
