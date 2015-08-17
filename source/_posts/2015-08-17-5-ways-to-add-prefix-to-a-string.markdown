@@ -1,9 +1,9 @@
 ---
 layout: post
-title: "5 ways to add prefix at beginning of a string"
-date: 2015-08-14 15:00:30 +0300
+title: "5 Ways to add prefix to a string"
+date: 2015-08-17 09:10:29 +0300
 comments: true
-categories: ruby 
+categories: ruby
 ---
 
 Mostly all of us like their our names. That's why effective email often starts from username.

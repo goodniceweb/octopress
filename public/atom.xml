@@ -4,7 +4,7 @@
   <title><![CDATA[GoodNiceWeb]]></title>
   <link href="http://goodniceweb.me/atom.xml" rel="self"/>
   <link href="http://goodniceweb.me/"/>
-  <updated>2015-08-16T23:52:36+03:00</updated>
+  <updated>2015-08-17T09:14:53+03:00</updated>
   <id>http://goodniceweb.me/</id>
   <author>
     <name><![CDATA[Alexey Cherkashin]]></name>
@@ -14,10 +14,10 @@
 
   
   <entry>
-    <title type="html"><![CDATA[5 Ways to Add Prefix at Beginning of a String]]></title>
-    <link href="http://goodniceweb.me/08-14-2015/5-ways-to-add-prefix-at-beginning-of-a-string.html"/>
-    <updated>2015-08-14T15:00:30+03:00</updated>
-    <id>http://goodniceweb.me/08-14-2015/5-ways-to-add-prefix-at-beginning-of-a-string</id>
+    <title type="html"><![CDATA[5 Ways to Add Prefix to a String]]></title>
+    <link href="http://goodniceweb.me/08-17-2015/5-ways-to-add-prefix-to-a-string.html"/>
+    <updated>2015-08-17T09:10:29+03:00</updated>
+    <id>http://goodniceweb.me/08-17-2015/5-ways-to-add-prefix-to-a-string</id>
     <content type="html"><![CDATA[<p>Mostly all of us like their our names. That&rsquo;s why effective email often starts from username.
 I had a task where I need to fetch any information about receiver and add it to very beginning of email.</p>
 
