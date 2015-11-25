@@ -10,7 +10,7 @@ Today I've visited BRUG meetup and want to share my experience from it.
 First of all I want to thank the organizers. You've done a great job guys!
 Secondly, the speakers. I didn't feel bored at anytime. Furthermore, lot of tricky parts
 were discussed there. [@leopard_me](https://twitter.com/leopard_me) (Alexey Vasiliev)
-came to us from Kyiv and [@akirill0v](https://twitter.com/akirill0v) - from Moskov.
+came to us from Kyiv and [@akirill0v](https://twitter.com/akirill0v) (Alexandr Kirillov) - from Moskov.
 It almost 500 miles for both! Guys, your talks were awesome.
 
 I want to leave here some lines about each talk just for myself. So, here we go.
