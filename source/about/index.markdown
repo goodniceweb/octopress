@@ -9,22 +9,22 @@ footer: true
 
 Email: goodniceweb {at} gmail {dot} com
 
-RubyOnRails developer with 3 years experience in web technologies.
+Full stack software engineer with 4+ years experience in web technologies.
 
 ## Skills
 
-|                           |                                                               |
-|---------------------------|---------------------------------------------------------------|
-|**Markup and styles:**     | HTML5/CSS3, Haml, Slim, SASS, SCSS, LESS                      | 
-|**Front-End scripts:**     | Javascript, CoffeeScript, JQuery, Backbone, TinyMCE           | 
-|**Server-side languages:** | PHP, Python, Ruby                                             | 
-|**Testing**                | Rspec, Capybara, Cucumber, Minitest, Guard, Spork, TDD, BDD   | 
-|**DB engines:**            | MySQL, SQLite, MongoDB                                        | 
-|**Back-End frameworks:**   | Symfony2, Django, rails, pure rack                            | 
-|**CMS:**                   | Joomla, Wordpress, Octopress                                  | 
-|**Cloud:**                 | AWS - EC2                                                     |  
-|**Search engines:**        | Sphinx, ElasticSearch                                         | 
-|**Also:**                  | Docker, Redis, SEO, Continuous Integration, DevOps            | 
+|                           |                                                                   |
+|---------------------------|-------------------------------------------------------------------|
+|**Markup and styles:**     | HTML5/CSS3, Haml, Slim, SASS, SCSS, LESS, BEM                     |
+|**Front-End scripts:**     | Javascript, CoffeeScript, JQuery, Backbone, Ember2, React, Redux  |
+|**Server-side languages:** | PHP, Python, Ruby                                                 |
+|**Testing**                | Rspec, Capybara, Selenium, Cucumber, Minitest, Guard, TDD, BDD    |
+|**DB engines:**            | MySQL, PostgreSQL, MongoDB                                        |
+|**Back-End frameworks:**   | Symfony2, Django, Ruby on Rails, Rack, Grape, Express             |
+|**CMS:**                   | Joomla, Wordpress, Octopress                                      |
+|**Cloud:**                 | AWS, DigitalOcean, Heroku                                         |
+|**Search engines:**        | Sphinx, ElasticSearch                                             |
+|**Also:**                  | Docker, Redis, SEO, Continuous Integration, DevOps                |
 
 
 
@@ -46,7 +46,7 @@ front-end scripts and have a lot of SEO experience and PHP basics.
 |                  |                                                    |
 |------------------|----------------------------------------------------|
 |**Company name: **| Detective agency "Orlan"                           |
-|**Role:         **| Junior RubyOnRails developer                       |
+|**Role:         **| Junior Ruby developer                              |
 |**Address:      **| Ukraine, Kharkov, Shevchenko str. 32, room 207A    |
 |**Duties:       **| Migration from Joomla to Rails, maintenance        |
 
@@ -57,7 +57,7 @@ front-end scripts and have a lot of SEO experience and PHP basics.
 |                  |                                             |
 |------------------|---------------------------------------------|
 |**Company name: **| Sloboda studio                              |
-|**Role:         **| Middle Rails developer                      |
+|**Role:         **| Middle Ruby developer                       |
 |**Address:      **| Ukraine, Kharkov, Moskovs'kyi Avenue, 257   |
 |**Duties:       **| Rails projects                              |
 
@@ -66,12 +66,12 @@ Agile, Scrum, Docker, Continuous Integration, DevOps.
 
 ### June 2015 - current
 
-|                  |                                    |
-|------------------|------------------------------------|
-|**Company name: **| ITechArt                           |
-|**Role:         **| Software Engineer                  |
-|**Address:      **| Belarus, Minsk, Tolstogo str. 10   |
-|**Duties:       **| Rails projects                     |
+|                  |                                         |
+|------------------|-----------------------------------------|
+|**Company name: **| ITechArt                                |
+|**Role:         **| Software Engineer                       |
+|**Address:      **| Belarus, Minsk, Tolstogo str. 10        |
+|**Duties:       **| Full stack projects                     |
 
 **Achievements:** Close working on Front-end + Back-end projects, in particular: Backbone and React.
 
